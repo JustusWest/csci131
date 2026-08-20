@@ -1,0 +1,54 @@
+---
+---
+
+@import "minima";
+
+.code-example {
+  border: 1px solid #b8c9dc;
+  border-left: 4px solid #2a5db0;
+  border-radius: 4px;
+  margin: 1.5em 0;
+  background: #f4f7fb;
+}
+
+.code-example > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.7em 1em;
+  font-weight: 600;
+  color: #2a5db0;
+  user-select: none;
+}
+
+.code-example > summary::-webkit-details-marker {
+  display: none;
+}
+
+.code-example > summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 0.6em;
+  font-size: 0.75em;
+  transition: transform 0.15s ease;
+}
+
+.code-example[open] > summary {
+  border-bottom: 1px solid #b8c9dc;
+}
+
+.code-example[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.code-example > *:not(summary) {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.code-example > *:last-child {
+  margin-bottom: 1em;
+}
+
+.code-example table {
+  margin: 0;
+}

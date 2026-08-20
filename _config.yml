@@ -1,0 +1,20 @@
+title: CSCI 131 — Introduction to Python Programming
+description: Lecture notes, Fall 2026
+baseurl: "/csci131"
+theme: minima
+markdown: kramdown
+future: true
+collections:
+  lectures:
+    output: true
+    permalink: /lectures/:name/
+defaults:
+  - scope:
+      path: ""
+      type: lectures
+    values:
+      layout: page
+header_pages:
+  - lectures.md
+  - labs.md
+  - code.md
