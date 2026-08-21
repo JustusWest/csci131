@@ -52,3 +52,94 @@
 .code-example table {
   margin: 0;
 }
+
+/* ---------------------------------------------------------------
+   Lab pages (_layouts/lab.html)
+   --------------------------------------------------------------- */
+
+.lab-due {
+  margin-top: -0.4em;
+  color: #555;
+}
+
+.lab-links {
+  list-style: none;
+  padding-left: 0;
+}
+
+.lab-links li {
+  margin-bottom: 0.3em;
+}
+
+.lab-links a::before {
+  content: "⬇";
+  margin-right: 0.5em;
+  color: #2a5db0;
+}
+
+.lab-pdf {
+  display: block;
+  width: 100%;
+  height: 80vh;
+  max-height: 900px;
+  border: 1px solid #b8c9dc;
+  border-radius: 4px;
+  margin: 1.5em 0;
+}
+
+.lab-source {
+  margin: 2em 0;
+}
+
+.lab-source h3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1em;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #b8c9dc;
+}
+
+.lab-source h3 code {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 1rem;
+}
+
+.lab-download {
+  font-size: 0.75em;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.lab-index {
+  list-style: none;
+  padding-left: 0;
+}
+
+.lab-index li {
+  margin-bottom: 0.5em;
+}
+
+.lab-index-due {
+  color: #555;
+  font-size: 0.85em;
+}
+
+.lab-back {
+  margin-top: 2.5em;
+  padding-top: 1em;
+  border-top: 1px solid #e0e6ed;
+  font-size: 0.9em;
+}
+
+@media screen and (max-width: 600px) {
+  .lab-pdf { height: 60vh; }
+  .lab-source h3 { flex-wrap: wrap; }
+}
+
+@media print {
+  .lab-pdf { display: none; }
+}

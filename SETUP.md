@@ -73,22 +73,23 @@ through `{{ "/path" | relative_url }}`, which prepends the baseurl. If you ever
 hard-code `/files/whatever.pdf` in a page, it will 404 on GitHub while working
 fine locally. Always use `relative_url`.
 
-## Step 5 — Local preview (optional but worth it)
+## Step 5 — Local preview
 
-Same as 264:
+**On the Mac, see [`RUNNING-LOCALLY.md`](RUNNING-LOCALLY.md)** for the full
+Ruby/Jekyll install. Short version, once that is done:
 
 ```bash
-cd C:/Users/micha/git-repos/csci131
+cd ~/git-repos/courses/csci131
 bundle install     # first time only
-bundle exec jekyll serve
+bundle exec jekyll serve --livereload
 ```
 
 Then open <http://localhost:4000/csci131/> — note the baseurl is part of the
 local URL too.
 
-If `bundle install` complains about Ruby, you already have a working Ruby+DevKit
-from the 264 site, so this should just work. `Gemfile.lock` is gitignored, which
-is what you want when GitHub does the real build.
+On the Windows machine, the Ruby+DevKit from the 264 site is already there, so
+`bundle install` should just work. `Gemfile.lock` is gitignored, which is what
+you want when GitHub does the real build.
 
 ---
 

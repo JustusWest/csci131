@@ -14,6 +14,13 @@ defaults:
       type: lectures
     values:
       layout: page
+  # Any index.md inside a labs/ subdirectory becomes a lab page automatically.
+  # `order` controls the position in the Labs index; override it per lab.
+  - scope:
+      path: "labs"
+    values:
+      layout: lab
+      order: 0
 header_pages:
   - lectures.md
   - labs.md

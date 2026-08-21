@@ -19,7 +19,6 @@ Office Hours: M–F 2:00–3:00 (Thursday on Zoom), and by appointment
 
 ## Sections
 
-| Section | Component | Days & Time | Room |
-|---|---|---|---|
-| A | Lecture | TODO | TODO |
-| A | Lab | TODO | TODO |
+| Section | Component | Days & Time     | Room        |
+| ------- | --------- | --------------- | ----------- |
+| A       | Lecture   | M/W/F 3:00-3:50 | Freedom 322 |

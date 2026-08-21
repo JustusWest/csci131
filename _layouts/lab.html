@@ -1,0 +1,85 @@
+---
+layout: page
+---
+
+{%- comment -%}
+  Lab page layout.
+
+  Any directory under labs/ that contains an index.md becomes a lab page.
+  This layout finds the files sitting in that same directory and lays them
+  out: the PDF handout (linked and embedded), then every .py source file
+  shown inline with a download link, then anything else as a plain link.
+
+  Nothing here is hard-coded to a particular lab. To add Lab 2: create
+  labs/Lab2/, drop the PDF and the .py files in, and add an index.md with a
+  title and an order. _config.yml applies this layout automatically.
+
+  Caveat: files pulled in with include_relative are run through Liquid, so a
+  source file containing Liquid delimiters would need a raw block around it.
+  Ordinary Python is fine.
+{%- endcomment -%}
+
+{%- assign lab_dir = page.dir -%}
+{%- assign lab_files = site.static_files | where_exp: "f", "f.path contains lab_dir" | sort: "name" -%}
+{%- assign handouts = lab_files | where: "extname", ".pdf" -%}
+{%- assign sources = lab_files | where: "extname", ".py" -%}
+
+{%- if page.due %}
+<p class="lab-due"><strong>Due:</strong> {{ page.due }}</p>
+{%- endif %}
+
+{{ content }}
+
+{%- if handouts.size > 0 %}
+<h2 id="handout">Handout</h2>
+
+<ul class="lab-links">
+  {%- for f in handouts %}
+  <li><a href="{{ f.path | relative_url }}">{{ f.name }}</a></li>
+  {%- endfor %}
+</ul>
+
+{%- for f in handouts %}
+<object class="lab-pdf" data="{{ f.path | relative_url }}" type="application/pdf">
+  <p>Your browser cannot display the PDF here.
+     <a href="{{ f.path | relative_url }}">Download {{ f.name }}</a> instead.</p>
+</object>
+{%- endfor %}
+{%- endif %}
+
+{%- if sources.size > 0 %}
+<h2 id="source-files">Source files</h2>
+
+<p>Download the starter files below and write your code in the marked area of
+each. Do not rename them.</p>
+
+{%- for f in sources %}
+<div class="lab-source">
+  <h3 id="{{ f.basename }}">
+    <code>{{ f.name }}</code>
+    <a class="lab-download" href="{{ f.path | relative_url }}">download</a>
+  </h3>
+{% highlight python %}{% include_relative {{ f.name }} %}{% endhighlight %}
+</div>
+{%- endfor %}
+{%- endif %}
+
+{%- comment -%}
+  Two chained where_exp filters rather than one with "and": Jekyll 3.10's
+  where_exp parses a single comparison only, and the github-pages gem pins
+  Jekyll 3.10. Boolean operators there raise
+  "Liquid syntax error: Expected end_of_string but found id".
+{%- endcomment -%}
+{%- assign extras = lab_files | where_exp: "f", "f.extname != '.pdf'" | where_exp: "f", "f.extname != '.py'" -%}
+
+{%- if extras.size > 0 %}
+<h2 id="other-files">Other files</h2>
+
+<ul class="lab-links">
+  {%- for f in extras %}
+  <li><a href="{{ f.path | relative_url }}">{{ f.name }}</a></li>
+  {%- endfor %}
+</ul>
+{%- endif %}
+
+<p class="lab-back"><a href="{{ '/labs/' | relative_url }}">&larr; All labs</a></p>
