@@ -1,23 +1,19 @@
 ---
-title: "02 — Variables, Input, and the Four-Step Shape"
-published: false
+title: "02 — Variables and Inpute"
+published: true
 ---
 
-**Friday, August 28**
+**Reading:** _Python for Everybody_, §2.2–2.4, §2.10, §2.12
 
-**Reading:** *Python for Everybody*, §2.2–2.4, §2.10, §2.12
-
-**Goal for today:** by the end of the period you will have written a program that asks a person a question and computes an answer from what they typed.
-
-That last sentence is also a description of Monday's assignment. Today is the day that makes Monday possible, so if you are going to type along with one class this semester, make it this one.
+**Goal for today:** write a program which takes input from the user and computes output based on input.
 
 ---
 
-## 0. Where we left off
+## 0. Review
 
-Wednesday you learned that Python evaluates expressions and prints things, that quotes are the difference between text and a name, that every value has a type, and that in a saved file nothing appears unless you `print` it.
+Last time we learned about REPL, the difference between names and strings, types, and the difference between using the interpreter and writing a script.
 
-One thing from Wednesday to keep in the front of your mind all period:
+Remember:
 
 ```python
 >>> type(17)
@@ -26,38 +22,37 @@ One thing from Wednesday to keep in the front of your mind all period:
 <class 'str'>
 ```
 
-Same characters on the screen. Different kinds of thing. Today that distinction stops being trivia and starts costing points.
-
----
+They may look the same, but Python treats them differently.
 
 ## 1. Variables
 
-A **variable** is a name that refers to a value. You make one with an **assignment statement**.
+A **variable** is a name that refers to a value. We create them with **assignment statements**
 
 <details class="code-example" markdown="1">
 <summary>Live code — assignment</summary>
 
 ```python
->>> message = 'And now for something completely different'
->>> n = 17
+>>> message = 'Hello world'
+>>> n = 14
 >>> pi = 3.1415926535897931
+>>> n
+14
 >>> print(n)
-17
+14
 >>> print(message)
-And now for something completely different
->>> print(n + 3)
-20
+Hello world
+>>> print(n + pi)
+17.1415926535897931
+
 ```
 
-Notice that the assignment lines print nothing. Assignment is not a question, it is an instruction: *store this value under this name.* Python stores it and says nothing back.
+Notice that the assignment lines print nothing. Assignment is an instruction: _store this value under this name._
 
 </details>
 
 ### `=` does not mean "equals"
 
-This is the biggest conceptual hurdle in Chapter 2, and it costs people points on Test 1 every year.
-
-In math, `x = 5` is a **claim** — a statement about the world that is either true or false. In Python, `x = 5` is a **command**: *put 5 in the box labeled x.* A command can be given again, with a different value, and nothing is contradicted.
+In algebra, `x = 5` is a **claim**: a statement about the world that is either true or false. In Python, `x = 5` is an **instruction**: _put 5 in the box named x._ An instruction can be given again to overwrite the value in the box.
 
 <details class="code-example" markdown="1">
 <summary>Live code — a variable varies</summary>
@@ -76,15 +71,15 @@ now I am a string
 <class 'str'>
 ```
 
-The name `x` did not change. What it *points at* changed, three times — and the third time it started pointing at something of an entirely different type. A variable's type is just the type of whatever is in it right now.
+The variable name `x` does not change, it's the same box. With different assignment statements, we **vary** the value in the box.
 
 </details>
 
-Read every assignment **right to left**: work out the right-hand side first, then point the name on the left at the result. That habit will pay off properly on September 4, when the right-hand side starts mentioning the variable being assigned.
+Assignment statements work **right to left**; first we evaluate the expression on the right hand side, then assign the variable name on the left to that value.
 
 ### Naming rules
 
-Names can contain letters, digits, and underscores. They **cannot start with a digit**, and they cannot be one of Python's reserved keywords.
+Names can contain letters, digits, and underscores. They can't start with a digit, and certain names are **reserved** by Python because they already refer to something.
 
 <details class="code-example" markdown="1">
 <summary>Live code — illegal names</summary>
@@ -103,15 +98,25 @@ SyntaxError: invalid decimal literal
 SyntaxError: invalid syntax
 ```
 
-The first is illegal because it starts with a number. The second is illegal because `class` is a **keyword** — one of the 35 words Python has reserved for itself: `if`, `for`, `def`, `while`, `and`, `or`, `not`, `import`, `return`, `True`, `False`, `None`, and 23 others.
-
-You do not need to memorize the list. You need to recognize the symptom: *if a name that looks fine gives you a syntax error, it is probably a keyword.* The full list is on page 21 of the book.
+The first is illegal because it starts with a number. The second is illegal because `class` is a **reserved keyword**.
 
 </details>
 
-### Names are for humans
+Here is the full list, but you don't need to memorize it:
 
-Python does not care what you call things. These three programs are identical to Python:
+|          |            |           |            |
+| -------- | ---------- | --------- | ---------- |
+| `False`  | `await`    | `else`    | `import`   |
+| `None`   | `break`    | `except`  | `in`       |
+| `True`   | `class`    | `finally` | `is`       |
+| `and`    | `continue` | `for`     | `lambda`   |
+| `as`     | `def`      | `from`    | `nonlocal` |
+| `assert` | `del`      | `global`  | `not`      |
+| `async`  | `elif`     | `if`      | `or`       |
+| `pass`   | `return`   | `try`     | `while`    |
+| `raise`  | `with`     | `yield`   |            |
+
+Names are arbitrary, they don't have any impact on the execution of the program. These are all equivalent behind the scenes:
 
 ```python
 x = 35
@@ -131,16 +136,14 @@ rate = 2.75
 pay = hours * rate
 ```
 
-Only one of them is readable, and the person it needs to be readable to is **you, three weeks from now, at 11pm.** Use **mnemonic** names — names that remind you what the value means. This is graded, lightly, all semester.
+The only impact of naming is readability - it's good practice to name things based on what they mean
 
----
+## 2. `input`
 
-## 2. `input` — and the trap the whole course walks into
-
-So far every program does the same thing every time you run it. To make it depend on *who is running it*, use `input`.
+If we want a variable to be set when we run the program, we use `input`:
 
 <details class="code-example" markdown="1">
-<summary>Live code — asking a question</summary>
+<summary>Live code — input</summary>
 
 ```python
 >>> name = input('What is your name? ')
@@ -151,59 +154,63 @@ Chuck
 Hello Chuck
 ```
 
-`input` does three things: it prints the prompt you gave it, it stops and waits for the user to type something and press Enter, and it hands back what they typed.
+`input` does three things: it prints the prompt you gave it, waits for the user to type something and press Enter, and assigns the typed value to the variable.
 
-Put a space at the end of your prompt string — `'What is your name? '` — or the user's typing will be jammed up against your question.
+It is good practice to put a space at the end of the `input` prompt so the user text is separated (i.e. `input('What is your name? ')`)
 
 </details>
 
-### Now the trap
-
-We are going to write the pay program from Monday's assignment, badly, on purpose. Watch closely.
+What type comes out of input?
 
 <details class="code-example" markdown="1">
-<summary>Live code — the bug everybody writes</summary>
+<summary>Live code</summary>
 
 ```python
->>> hours = input('Enter Hours: ')
-Enter Hours: 35
->>> rate = input('Enter Rate: ')
-Enter Rate: 2.75
->>> pay = hours * rate
+>>> apples = input('Enter apples: ')
+Enter apples: 10
+>>> oranges = input('Enter oranges: ')
+Enter oranges: 5
+>>> total = apples + oranges
+'105'
+```
+
+What happened? Remember how we can check under the hood:
+
+```python
+>>> print(total)
+105
+>>> type(total)
+<class 'str'>
+
+```
+
+</details>
+
+**`input` always gives you back a string regardless of what the user types.**
+
+In this example, the `+` oeprator glued the two strings together (don't worry about why just yet).
+
+This example fails silently, but that won't always be the case:
+
+<details class="code-example" markdown="1">
+<summary>Live code</summary>
+
+```python
+>>> pay = input('Enter pay: ')
+Enter pay: 10
+>>> hours = input('Enter hours: ')
+Enter hours: 40
+>>> total = pay * hours
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: can't multiply sequence by non-int of type 'str'
 ```
 
-Why? Ask Python what it thinks it has:
-
-```python
->>> type(hours)
-<class 'str'>
->>> print(hours)
-35
-```
-
-It *prints* as `35`. It *is* the string `'35'`.
-
-> **`input` always gives you back a string. Always. Even when the user types digits.**
-
-This is the single most important sentence in Chapter 2. Python has no way to know you wanted a number — the user typed characters on a keyboard, and characters are text.
-
-And here is the genuinely nasty version — the one that does not crash:
-
-```python
->>> print(hours + rate)
-352.75
-```
-
-No error. No warning. Python took `'35'` and `'2.75'` and glued them end to end. It did not add them, and nothing told you so. If you had not been paying attention, you would have handed that in.
-
-*(Why `+` glues strings instead of adding them is a September 4 question. Today the lesson is only that it does, silently, and that a number is not the same thing as text that looks like a number.)*
+In this example, we used the `*` operator, which is not valid for strings so the program crashes.
 
 </details>
 
-### The fix: convert
+### The fix: type conversion.
 
 <details class="code-example" markdown="1">
 <summary>Live code — <code>int</code> and <code>float</code></summary>
@@ -217,27 +224,25 @@ No error. No warning. Python took `'35'` and `'2.75'` and glued them end to end.
 96.25
 ```
 
-`int` and `float` are **type conversion functions**. Hand them a string that looks like a number and they hand back an actual number.
+`int` and `float` are some of the reserved keywords. They refer to **type conversion functions**, we can give them some data and they do their best to convert it into a number.
 
 Which one do you use?
 
-- `int` when the value can only be whole — a count of people, a number of pizzas.
-- `float` when it can have a decimal part — money, temperature, hours worked.
+- `int` is short for integer; it refers to whole numbers.
+- `float` is short for floating point number; it refers to numbers that have a decimal place (don't worry about the floating part).
 
-**When you are unsure, use `float`.** It handles `35` just fine (as `35.0`); `int` cannot handle `2.75` at all. We will make this choice more carefully on September 4; for Monday, "when unsure use float" is the whole rule.
-
-Two ways to write it. Both are correct:
+**If you are unsure, use `float`.** It handles `35` as `35.0`; `int` cannot handle `2.75`.
 
 ```python
 # spelled out
-rate_text = input('Enter Rate: ')
-rate = float(rate_text)
+pay_str = input('Enter pay: ')
+pay = float(pay_str)
 
 # nested -- convert as it comes in
-rate = float(input('Enter Rate: '))
+pay = float(input('Enter pay: '))
 ```
 
-The nested version reads inside-out: `input` runs first and produces text, then `float` converts that text, then `=` stores the result. This is the form you will see everywhere, including on Monday's handout.
+The nested version reads inside-out: `input` runs first and produces text, then `float` converts that text, then `=` stores the result.
 
 </details>
 
@@ -245,15 +250,15 @@ The nested version reads inside-out: `input` runs first and produces text, then 
 <summary>What if the user types something that isn't a number?</summary>
 
 ```python
->>> speed = input('How fast? ')
-How fast? an African or a European swallow
->>> int(speed)
+>>> pay = input('Enter pay: ')
+Enter pay: apple
+>>> int(pay)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-ValueError: invalid literal for int() with base 10: 'an African or a European swallow'
+ValueError: invalid literal for int() with base 10: apple'
 ```
 
-Your program crashes. For now that is fine and expected — **Monday's assignment assumes the user types a number.** Handling bad input gracefully needs `try` / `except`, which is Chapter 3. File it away; do not go looking for it yet.
+The program crashes on unexpected input. For now, we assume the user gives us the right input type; we will learn how to handle this gracefully later.
 
 </details>
 
@@ -261,22 +266,19 @@ Your program crashes. For now that is fine and expected — **Monday's assignmen
 
 ## 3. Putting it together
 
-Every program you write this week has the same four-step shape:
+For this weeks assignment, programs will have this shape:
 
 1. **Prompt** — `input` a value
 2. **Convert** — `int` or `float` it
 3. **Compute** — do the arithmetic
-4. **Print** — report the answer
+4. **Print** — the answer
 
-Here is all of today in one file. We build it a few lines at a time, running it after each addition. **Get something that runs, then grow it.** Do not write twenty lines and then start debugging.
+We will build this up one step at a time
 
 <details class="code-example" markdown="1">
 <summary>Live code — <code>dinner.py</code>, stage 1</summary>
 
-The smallest thing that runs:
-
 ```python
-# dinner.py -- CSCI 131, Friday Aug 28
 
 bill = float(input('Bill total: '))
 print('Bill:', bill)
@@ -286,8 +288,6 @@ print('Bill:', bill)
 Bill total: 40
 Bill: 40.0
 ```
-
-Four lines including a comment and a blank one, and it works. Note `40.0` — you typed `40`, `float` made it a decimal number. That is correct, not a bug.
 
 </details>
 
@@ -321,11 +321,9 @@ Total: 48.0
 <details class="code-example" markdown="1">
 <summary>Live code — the finished <code>dinner.py</code></summary>
 
-One more input, one more line of arithmetic:
+Split it:
 
 ```python
-# dinner.py -- CSCI 131, Friday Aug 28
-# Dr. West
 
 bill = float(input('Bill total: '))
 tip_percent = float(input('Tip percent: '))
@@ -351,44 +349,17 @@ Total: 48.0
 Each person pays: 12.0
 ```
 
-Things to notice on the way through:
-
-- `people` is `int` — you cannot seat 3.7 people. `bill` is `float`, because money has cents.
-- Every line of output is a `print`. Nothing appears on its own in a saved file — that was Wednesday's lesson and it has not changed.
-- The prompts end with a space, so what the user types does not run into the question.
-
 </details>
 
-### Check it against something you already know
+Let's check the correctness with a test case (something we already know the answer for):
 
-The last thing to do before calling a program finished: run it with numbers whose answer you can work out in your head.
-
-A $40 bill, a 20% tip, four people. That is $8 of tip, $48 total, $12 each — no calculator needed. If the program had printed `Each person pays: 10.0`, it would still have *run*. No error message, no crash, nothing to alert you. A silent wrong answer is only catchable by checking it against an answer you already have.
-
-**Every problem on Monday's assignment gives you a sample run with the correct output in it. That is not decoration.**
+A $40 bill, a 20% tip, four people. That is $8 of tip, $48 total, $12 each. If your program is printing something else, there is an error somewhere. This error will not surface with an error message, we call it a **semantic error** meaning the program runs but theres something wrong in the logic.
 
 ---
 
-## What you should be able to do now
+## Before Next Class
 
-- [ ] Create a variable, print it, and reassign it to a different value and a different type.
-- [ ] Say why `=` is a command and not a claim.
-- [ ] Say why `76trombones` and `class` are illegal names.
-- [ ] Use `input` with a prompt that ends in a space.
-- [ ] **State from memory that `input` always returns a string**, and convert with `int` or `float` before doing arithmetic.
-- [ ] Recognize the silent version of that bug — output that looks like two numbers stuck together.
-- [ ] Write a program with the four-step shape: prompt, convert, compute, print.
-- [ ] Check a finished program against an answer you already know.
+Next time is our **first graded programming assignment**. You write it in the room on the lab machines, and you submit before you leave.
 
-## Before Monday
-
-Monday is your **first graded programming session**. You write it in the room on the lab machines, and you submit before you leave. I will spend the first part of the period working an example at the board and the rest circulating while you work. Asking me for help is the intended use of that period.
-
-To be ready:
-
-1. **Read §2.2–2.4, §2.10, and §2.12.** You have seen most of it now.
-2. **Do Exercise 4 at the end of Chapter 2.** Given `width = 17` and `height = 12.0`, write down the value *and the type* of each of `width//2`, `width/2.0`, `height/3`, and `1 + 2 * 5`. Then check yourself at the `>>>` prompt. One of those uses an operator we have not covered — predict what it does from the answer Python gives you, and bring your guess Friday.
-3. **Make sure you can open IDLE, create a file, save it, and run it with F5 without help.** If any of those four steps is shaky, come to office hours before Monday — M–F 2:00–3:00, right before class, Freedom 319. Do not let a file-menu problem cost you points on a programming problem.
-4. If Exercise 4 produces an error you cannot decode, **write the last line of the message down and bring it Monday.**
-
-You have everything you need. See you Monday.
+1. **Read §2.2–2.4, §2.10, and §2.12.** We've covered most of this content during lecture.
+2. Try some practice problems in the book - Exercise 4 at the end of Chapter 2 is good.
