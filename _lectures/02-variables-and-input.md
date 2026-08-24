@@ -1,5 +1,6 @@
 ---
 title: "02 — Variables, Input, and the Four-Step Shape"
+published: false
 ---
 
 **Friday, August 28**

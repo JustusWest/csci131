@@ -3,7 +3,10 @@ description: Lecture notes, Fall 2026
 baseurl: "/csci131"
 theme: minima
 markdown: kramdown
-future: true
+# Lectures/labs dated after "now" are excluded from the build entirely
+# (no page written, so a guessed URL 404s). Preview them locally with
+# `bundle exec jekyll serve --future`, which overrides this for that run only.
+future: false
 collections:
   lectures:
     output: true
