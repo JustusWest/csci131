@@ -12,14 +12,11 @@ title: "01 — Talking to Python: the Interpreter, Types, and Errors"
 
 ## 1. Whats a program
 
-A **program** is a sequence of instructions written down in a language the computer can follow. The hard part of this course is not learning the instructions, the hard part is learning to say what you mean with enough precision that a machine gets it right.
+A **program** is a sequence of instructions written down in a language the computer can follow.
 
-1. **Say it precisely.** Break a problem into steps small enough that each one is obviously correct.
-2. **Read what it actually did.** When the machine does something surprising, the machine is right and your instructions were wrong.
 
----
 
-## 2. The Python prompt
+# The Python prompt
 
 Open **IDLE** from the Start menu. You get a window with this in it:
 
@@ -33,7 +30,7 @@ This is the **interactive interpreter**, it's the best way to quickly test a sta
 
 ---
 
-## 3. Arithmetic
+## 2. Arithmetic
 
 Let's test a couple basic math statements to see what python does.
 
@@ -95,37 +92,7 @@ There are some more arithmetic operators, but we leave them til later.
 
 ---
 
-## 4. `print`
-
-At the prompt, Python shows you the value of every expression you type (this is the **print** part of REPL). In a saved program the print is not automatic, we have to do it ourselves.
-
-<details class="code-example" markdown="1">
-<summary>Live code — print</summary>
-
-```python
->>> print(4)
-4
->>> print(2 + 3)
-5
->>> print('Hello, World!')
-Hello, World!
->>> print('The answer is', 42)
-The answer is 42
-```
-
-Three things to notice:
-
-1. `print` needs **parentheses** around what you want printed.
-2. Text goes in **quotes**. `'Hello'` is text; `Hello` without quotes means something completely different.
-3. If you give `print` several things separated by commas, it sticks them together with a space between them.
-
-</details>
-
-`print` is a **function**: a named piece of work that somebody else already wrote, which you can use by name. We write our own in a few weeks. For now, know that `name(...)` means "run the thing called _name_ on the stuff in the parentheses."
-
----
-
-## 5. Basic Types
+## 3. Basic Types
 
 Every value in Python has a **type**, and the type decides what Python will do with it. Ask with the `type` function.
 
@@ -158,9 +125,9 @@ What's going on here?
 
 ---
 
-## 6. Error Messages
+## 4. Error Messages
 
-If we try to break the rules Python will tell us with an error message. The error message is informative: it tells us what went wrong. Learning how to read error messages is an important skill
+If we try to break the rules Python will tell us with an error message. Learning how to read error messages is an important skill
 
 <details class="code-example" markdown="1">
 <summary>Live code — three errors, on purpose</summary>
@@ -232,13 +199,16 @@ Adding a number to a word is not a meaningful request. Python is telling you it 
 
 ---
 
-## 7. Our first program
+## 5. Our first program
+
 
 When we work in the IDLE shell everything we type goes away as soon as we close the shell.
 
 Real programs live in files. Make a folder on your desktop with your name - this is where you should save all your programs for this class, for ease of use.
 
 In IDLE: **File → New File**, you will get a blank text editor - this is not an interpreter its a document.
+
+At the prompt, Python shows you the value of every expression you type (this is the **print** part of REPL). In a saved program the print is not automatic, we have to do it ourselves.
 
 <details class="code-example" markdown="1">
 <summary>Live code — <code>hello.py</code></summary>
@@ -257,19 +227,19 @@ Check the shell and you should see:
 Hello, World!
 ```
 
-Try some of our arithmetic statements in the `hello.py` file:
 
 </details>
+Let's try some of our arithmetic statements in the `hello.py` file:
 
 <details class="code-example" markdown="1">
 <summary>Live code</summary>
-
+Add to `hello.py`:
 ```python
 2 + 3
 'Hello again'
 ```
 
-Nothing new appears in the output.
+Run it and notice that nothing new appears in the output.
 
 At the `>>>` prompt, typing `2 + 3` shows you `5`, because interactive mode displays the value of whatever you type. **In a saved program, it does not.** Python evaluates `2 + 3`, gets `5`, and throws it away, because you never asked it to do anything with it.
 
@@ -277,14 +247,23 @@ We have to print explicity:
 
 ```python
 print(2 + 3)
-print('Hello again')
+print('Hello', 'again')
+
 ```
 
 </details>
 
+Three things to notice:
+
+1. `print` needs **parentheses** around what you want printed.
+2. Text goes in **quotes**. `'Hello'` is text; `Hello` without quotes means something completely different.
+3. If you give `print` several things separated by commas, it sticks them together with a space between them.
+
+`print` is a **function**: a named piece of work that somebody else already wrote, which you can use by name. We write our own in a few weeks. For now, know that `name(...)` means "run the thing called _name_ on the stuff in the parentheses."
+
 ---
 
-## 8. Comments
+## 6. Comments
 
 <details class="code-example" markdown="1">
 <summary>Live code — comments</summary>
@@ -302,7 +281,7 @@ Everything from a `#` to the end of the line is ignored by Python completely. It
 
 ---
 
-## Before Friday
+## For next class
 
 1. **Read** §1.3, §1.5, §1.7–1.8, §1.10, and §2.1, §2.5–2.7, §2.11 of _Python for Everybody_ (py4e.com/book).
 

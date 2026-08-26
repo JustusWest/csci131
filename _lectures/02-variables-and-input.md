@@ -1,5 +1,5 @@
 ---
-title: "02 — Variables and Inpute"
+title: "02 — Variables and Input"
 published: true
 ---
 
