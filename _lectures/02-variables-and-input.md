@@ -210,7 +210,7 @@ In this example, we used the `*` operator, which is not valid for strings so the
 
 </details>
 
-### The fix: type conversion.
+### Type conversion.
 
 <details class="code-example" markdown="1">
 <summary>Live code — <code>int</code> and <code>float</code></summary>
@@ -229,7 +229,7 @@ In this example, we used the `*` operator, which is not valid for strings so the
 Which one do you use?
 
 - `int` is short for integer; it refers to whole numbers.
-- `float` is short for floating point number; it refers to numbers that have a decimal place (don't worry about the floating part).
+- `float` is short for floating point number; it refers to numbers that have a decimal place
 
 **If you are unsure, use `float`.** It handles `35` as `35.0`; `int` cannot handle `2.75`.
 
@@ -354,6 +354,26 @@ Each person pays: 12.0
 Let's check the correctness with a test case (something we already know the answer for):
 
 A $40 bill, a 20% tip, four people. That is $8 of tip, $48 total, $12 each. If your program is printing something else, there is an error somewhere. This error will not surface with an error message, we call it a **semantic error** meaning the program runs but theres something wrong in the logic.
+---
+### Practice
+Assume that we execute the following assignment statements:
+
+```python
+  width = 17
+  height = 12.0
+```
+For each of the following expressions, guess the value and type of the expression:
+1. width//2
+2. width/2.0
+3. height/3
+4. width//height
+5. width/height
+6. 1+ 2 * 5
+
+Use the Python interpreter to check your guesses.
+
+What is the difference between `//` and `/`?
+
 
 ---
 
@@ -362,4 +382,3 @@ A $40 bill, a 20% tip, four people. That is $8 of tip, $48 total, $12 each. If y
 Next time is our **first graded programming assignment**. You write it in the room on the lab machines, and you submit before you leave.
 
 1. **Read §2.2–2.4, §2.10, and §2.12.** We've covered most of this content during lecture.
-2. Try some practice problems in the book - Exercise 4 at the end of Chapter 2 is good.
