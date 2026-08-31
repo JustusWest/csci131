@@ -2,6 +2,7 @@
 title: "03 — How Computers Run Programs"
 published: false
 ---
+Skipping for now due to travel, may return to later in semester
 
 **Wednesday, September 2 · Zoom**
 

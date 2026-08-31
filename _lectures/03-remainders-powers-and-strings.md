@@ -1,6 +1,6 @@
 ---
-title: "04 — Remainders, Powers, and Strings"
-published: false
+title: "03 — Remainders, Powers, and Strings"
+published: true
 ---
 
 **Friday, September 4**
