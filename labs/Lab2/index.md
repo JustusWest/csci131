@@ -1,0 +1,14 @@
+---
+title: "Lab 2 — Remainders, Powers and Strings"
+order: 1
+due: "Wednesday, September 9"
+---
+
+Written in class on the lab machines.
+
+Put your name in a comment at the top of each file, and if a classmate helped
+you, put their name there too. Submit all three files on Canvas before you
+leave — a partial program earns partial credit, an empty one earns none.
+
+Run your program on the values in each table and confirm you get the output
+shown before you submit.
