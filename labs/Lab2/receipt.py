@@ -24,3 +24,7 @@
 # Check your program against the table on the handout before you submit.
 
 # ---------------- write your code below this line ----------------
+
+name = input('Item name: ')
+quantity_text = input('Quantity: ')
+price = float(input('Unit price: '))

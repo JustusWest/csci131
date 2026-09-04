@@ -7,23 +7,9 @@ published: true
 
 **Reading:** *Python for Everybody*, §2.5, §2.7–2.9, and §2.2 again
 
-**Goal for today:** the rest of Chapter 2's operators — everything you need for Wednesday's assignment.
-
-Back in the room, back on the keyboards. Type along.
-
 ---
 
-## 0. Where we left off
-
-Two weeks ago you learned the four-step shape — prompt, convert, compute, print — and Monday's assignment was three variations on it. Wednesday we looked at what the machine was doing underneath.
-
-I have been deferring three things since the first day. Today you get all of them, plus the explanation for a bug I showed you on August 28 and refused to explain.
-
-One of them you have already met. In Exercise 4 you evaluated `width//2` with `width = 17` and got `8`. Let us start there.
-
----
-
-## 1. Two more ways to divide
+## 1. Different Division
 
 <details class="code-example" markdown="1">
 <summary>Live code — <code>/</code> vs <code>//</code> vs <code>%</code></summary>
@@ -38,17 +24,15 @@ One of them you have already met. In Exercise 4 you evaluated `width//2` with `w
 ```
 
 - `/` is regular division. **It always gives a float**, even when it divides evenly: `10 / 5` is `2.0`, not `2`.
-- `//` is **floor division** — divide and throw away the remainder. It answers *"how many whole times does it go in?"*
-- `%` is the **modulus** operator — the remainder. It answers *"what is left over?"*
-
-So: 7 divided by 3 is 2, with 1 left over. `//` gives you the 2 and `%` gives you the 1. Between them they say everything about the division, and neither one loses information to a decimal point.
+- `//` is **floor division** or **integer division** — divide and throw away the remainder.
+- `%` is the **modulus** operator — it gives the remainder.
 
 </details>
 
-`%` looks like a curiosity and turns out to be everywhere. Two uses to file away right now:
+`%` is not commonly used in math, but is very useful in programming:
 
 <details class="code-example" markdown="1">
-<summary>Live code — two standard tricks</summary>
+<summary>Live code — modulus uses</summary>
 
 ```python
 >>> 18 % 2      # remainder 0 means it divides evenly -- so, even
@@ -61,15 +45,13 @@ So: 7 divided by 3 is 2, with 1 left over. `//` gives you the 2 and `%` gives yo
 123
 ```
 
-"Is it even?" and "what is the last digit?" are both remainder questions. You will use the first one constantly once we have conditionals.
-
 </details>
 
 ---
 
-## 2. Reassignment: a variable that eats its own value
+## 2. Reassignment
 
-On August 28 I told you to read every assignment **right to left** and said the habit would pay off later. Later is now.
+Recall that we read assignment statements right to left.
 
 <details class="code-example" markdown="1">
 <summary>Live code — <code>x = x + 1</code></summary>
@@ -83,7 +65,7 @@ On August 28 I told you to read every assignment **right to left** and said the 
 6
 ```
 
-`x = x + 1` is nonsense as algebra — no number equals itself plus one. It is completely routine as Python, because `=` is a command, not a claim.
+`x = x + 1` is nonsense as algebra — no number equals itself plus one. It is very common in Python.
 
 Read it right to left, exactly as the machine does it:
 
@@ -94,13 +76,12 @@ The old value is used to compute the new one, and then it is gone.
 
 </details>
 
-This matters today because it lets you take a quantity apart piece by piece. Pull off the largest chunk, keep what is left, repeat.
 
 ---
 
-## 3. Putting those together: the cascade
+## 3. Putting it together
 
-Here is the pattern that `//`, `%`, and reassignment exist to serve. We build it in stages, running it after each addition.
+A common pattern for using `%`, `//` and reassignment involves deconstructing a value piece by piece.
 
 <details class="code-example" markdown="1">
 <summary>Live code — <code>seconds.py</code>, stage 1</summary>
@@ -121,7 +102,7 @@ Total seconds: 3725
 Hours: 1
 ```
 
-`int`, not `float` — this is a count of seconds, and half a second is not a thing we care about here. And `//`, because one and a bit hours is one hour.
+`int`, not `float` — this is a count of seconds, and half a second is not a thing we care about here right now.
 
 </details>
 
@@ -147,7 +128,7 @@ Hours: 1
 Minutes: 2
 ```
 
-`total = total % 3600` is the reassignment from §2 doing real work. After it, `total` no longer means "the whole duration" — it means "the part that did not fit into whole hours." 3725 seconds is one hour with 125 seconds left over, so `total` becomes 125, and 125 // 60 is 2 minutes.
+`total = total % 3600` is the reassignment; it gives us the piece we didn't count in hours.
 
 </details>
 
@@ -155,9 +136,6 @@ Minutes: 2
 <summary>Live code — the finished <code>seconds.py</code></summary>
 
 ```python
-# seconds.py -- CSCI 131, Friday Sept 4
-# Dr. West
-
 total = int(input('Total seconds: '))
 
 hours = total // 3600
@@ -191,11 +169,11 @@ big_unit = amount // size
 amount   = amount % size
 ```
 
-Divide to get the whole units, take the remainder to get what is left, move to the next size down. Wednesday's assignment uses this shape with different numbers, so make sure you can explain — out loud, to the person next to you — why the second line is there.
+Divide to get the whole units, take the remainder to get what is left, move to the next size down. Our next assignment will use this shape.
 
 ---
 
-## 4. Powers, and a parenthesis that matters
+## 4. Powers
 
 <details class="code-example" markdown="1">
 <summary>Live code — <code>**</code></summary>
@@ -209,9 +187,9 @@ Divide to get the whole units, take the remainder to get what is left, move to t
 1.4142135623730951
 ```
 
-`**` is exponentiation. Note that it is **not** `^` — in Python `^` means something else entirely, and it will not give you an error, it will quietly give you a wrong answer.
+`**` is exponentiation. 
 
-`**` binds tighter than `*` and `/`, which bind tighter than `+` and `-`:
+Remember order of operations (PEMDAS) `**` has priority over `*` and `/`, which have priority over `+` and `-`:
 
 ```python
 >>> 2 * 3 ** 2
@@ -226,15 +204,10 @@ Divide to get the whole units, take the remainder to get what is left, move to t
 
 </details>
 
-Look hard at those last two. `3 + 4 ** 2` is `19` and `(3 + 4) ** 2` is `49`. Both run. Neither errors. One of them is the answer you wanted and the other is a **semantic error** — the silent kind from Wednesday.
-
-There is no trick for spotting these. There is only the parenthesis you type because you thought about it, and the sample output you check yourself against.
-
 ---
 
-## 5. What `+` really does to text
+## 5. String Concatenation
 
-Time to explain August 28.
 
 <details class="code-example" markdown="1">
 <summary>Live code — string operators</summary>
@@ -255,52 +228,18 @@ Time to explain August 28.
 
 </details>
 
-Now put it beside the numeric version:
-
-<details class="code-example" markdown="1">
-<summary>Live code — one operator, two jobs</summary>
-
-```python
->>> 10 + 15
-25
->>> '10' + '15'
-'1015'
-```
-
-Same operator. Different types. Different meaning. Python is not being sloppy — it is paying attention to what kind of thing is on either side of the `+` and choosing accordingly.
-
-And *this* is what happened on August 28:
-
-```python
->>> hours = input('Enter Hours: ')
-Enter Hours: 35
->>> rate = input('Enter Rate: ')
-Enter Rate: 2.75
->>> print(hours + rate)
-352.75
-```
-
-`input` handed back two strings. `+` saw two strings and did the string thing. `'35'` glued to `'2.75'` is `'352.75'`, which looks enough like a number to slip past you.
-
-That bug is not Python being weird. It is Python being consistent, applied to data whose type you had not checked.
-
-</details>
 
 ---
 
 ## 6. Choosing `int` or `float` on purpose
-
-On August 28 the rule was "when unsure, use `float`." That got you through Monday. Now do it deliberately.
 
 Ask what the quantity *is*:
 
 - **A count** — people, coins, seconds, pizzas, students. It cannot be fractional. Use `int`.
 - **A measurement** — money, temperature, hours worked, a rate. It can be fractional. Use `float`.
 
-The distinction is not cosmetic, because `int` and `float` behave differently:
-
 <details class="code-example" markdown="1">
-<summary>Live code — <code>int</code> chops</summary>
+<summary>Live code — <code>int</code> truncation</summary>
 
 ```python
 >>> int(3.99999)
@@ -322,7 +261,7 @@ Traceback (most recent call last):
 ValueError: invalid literal for int() with base 10: '2.75'
 ```
 
-So if you use `int` on a value the user might reasonably type as `2.75`, your program crashes on a perfectly sensible input. That is a real bug, not a technicality.
+So if you use `int` on a value the user might reasonably type as `2.75`, your program crashes.
 
 </details>
 
@@ -330,26 +269,8 @@ The `seconds.py` example used `int` throughout, on purpose: `//` and `%` on a wh
 
 ---
 
-## What you should be able to do now
-
-- [ ] Use `/`, `//`, and `%`, and say what each one answers.
-- [ ] Use `%` to test whether a number is even, and to get its last digit.
-- [ ] Read `x = x + 1` right to left and explain what it does.
-- [ ] Write the cascade — `unit = amount // size` then `amount = amount % size` — and explain why the second line is needed.
-- [ ] Use `**`, and know it is not `^`.
-- [ ] Predict `3 + 4 ** 2` and `(3 + 4) ** 2`, and say which kind of error the wrong one would be.
-- [ ] Say what `+` and `*` do to strings, and explain the `352.75` bug from August 28.
-- [ ] Choose `int` or `float` deliberately, and say what `int(3.99999)` gives you.
-
 ## Before Wednesday
 
-Wednesday, September 9 is your **second graded programming session**, run exactly like the first: starter files from Canvas, written in the room, submitted before you leave, same resubmission window. It is more demanding than the first one — each problem uses several of today's operators together rather than one at a time.
+Next class is your **second graded programming assignment**; tt is more demanding than the first one — each problem uses several of today's operators together rather than one at a time.
 
-To be ready:
-
-1. **Read §2.5, §2.7–2.9, and re-read §2.2.**
-2. **Do Chapter 2 Exercise 4 again**, now that you have met `//` properly. You should be able to give the value *and type* of all four expressions without running them.
-3. **Modify `seconds.py`** so it also reports the number of whole days. One new line before the hours line, and one change to the line after it. If you can do that, you can do Wednesday's first problem.
-4. At the prompt, work out what `'5' * 3` does, and then what `5 * 3` does, and be sure you can say why they differ.
-
-Test 1 is Friday, September 11 and covers all of Chapters 1 and 2 — everything from August 26 through Wednesday. Bring questions to the assignment period; I would rather answer them then than have you save them for the test.
+Test 1 is Friday, September 11 and covers all of Chapters 1 and 2. 

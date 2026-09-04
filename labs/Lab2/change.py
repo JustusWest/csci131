@@ -16,4 +16,14 @@
 #
 # Check your program against the table on the handout before you submit.
 
+# I've given you the input and output statements to get started, but you will need to define those variables.
+#
 # ---------------- write your code below this line ----------------
+cents = int(input('Enter an amount in cents: '))
+
+
+
+print('Quarters:', quarters)
+print('Dimes:', dimes)
+print('Nickels:', nickels)
+print('Pennies:', cents)

@@ -16,3 +16,9 @@
 # Check your program against the table on the handout before you submit.
 # Pay attention to parentheses, you won't get an error in your program, just a wrong answer.
 # ---------------- write your code below this line ----------------
+
+start = float(input('Starting amount: '))
+rate = float(input('Growth rate per period: '))
+periods = int(input('Number of periods: '))
+
+
