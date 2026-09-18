@@ -9,9 +9,14 @@ Lab assignments and starter files, one page per lab. I will do my best to keep t
 {%- comment -%}
   Lists every labs/<something>/index.md. The `where: "name", "index.md"` step
   is what keeps this page from listing itself.
+
+  The assign below closes with a plain `%}`, not `-%}`, on purpose. `-%}` eats
+  the blank line before the <ul>, which glues the list onto the paragraph
+  above it; kramdown then reads the tag as inline text and escapes it, and the
+  raw <ul> shows up on the page.
 {%- endcomment -%}
 
-{%- assign lab_pages = site.pages | where: "name", "index.md" | where_exp: "p", "p.dir contains '/labs/'" | sort: "order" -%}
+{%- assign lab_pages = site.pages | where: "name", "index.md" | where_exp: "p", "p.dir contains '/labs/'" | sort: "order" %}
 
 <ul class="lab-index">
 {%- for lab in lab_pages %}
