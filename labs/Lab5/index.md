@@ -1,7 +1,7 @@
 ---
-title: "Lab 4 — Nested Conditonals and Logical Operators"
-order: 4
-due: "Wednesday, September 23"
+title: "Lab 5 - Loops"
+order: 5
+due: "Firday, October 2"
 ---
 
 Written in class on the lab machines.
