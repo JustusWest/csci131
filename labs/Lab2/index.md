@@ -1,6 +1,6 @@
 ---
 title: "Lab 2 — Remainders, Powers and Strings"
-order: 1
+order: 2
 due: "Wednesday, September 9"
 ---
 
