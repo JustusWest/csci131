@@ -5,7 +5,7 @@ published: true
 
 **Wednesday, October 14**
 
-**Reading:** *Python for Everybody*, §6.5, §6.9, §8.2, `sort` in §8.6, §8.8, and the first item of §8.14
+**Reading:** *Python for Everybody*, §6.5, §6.9 and §8.2
 
 ---
 
@@ -152,7 +152,7 @@ None
 
 </details>
 
-`print` does its job (putting `hi` on the screen), then returns `None`. Keep `None` in mind; it comes back in section 5.
+`print` does its job (putting `hi` on the screen), then returns `None`. Keep `None` in mind; it comes back next lecture, with list methods.
 
 ---
 
@@ -279,173 +279,145 @@ answer = answer.strip().lower()
 
 ---
 
-## 5. List methods change the list
+## 5. Capitalizing the vowels
 
-Lists are mutable, so list methods work the other way round: they **change the list** and return `None`. You already know `append`. The other one we need is `sort`.
+> **Problem:** ask for a word and replace every vowel with its capital letter, so `banana` becomes `bAnAnA`.
+
+`replace` does the changing, and because it returns a new string, we have to assign the result. The question is how to decide what to replace. Here are two ways.
+
+### Way 1: loop over the word
 
 <details class="code-example" markdown="1">
-<summary>Live code — <code>append</code> and <code>sort</code></summary>
+<summary>Live code — <code>capvowels.py</code>, looping over the word</summary>
 
 ```python
->>> nums = [7, 4, 19, 12, 1]
->>> nums.append(5)
->>> nums
-[7, 4, 19, 12, 1, 5]
->>> nums.sort()
->>> nums
-[1, 4, 5, 7, 12, 19]
+# capvowels.py -- CSCI 131, Wednesday Oct 14
+
+word = input('Word: ')
+
+for letter in word:
+    if letter in 'aeiou':
+        word = word.replace(letter, letter.upper())
+
+print(word)
+```
+
+```
+Word: banana
+bAnAnA
 ```
 
 </details>
 
-Neither line shows anything at the prompt, because there is no value to show: both return `None`. So what happens if you assign the result, the way you have to with a string method?
+Go through the word one letter at a time. If the letter is a vowel (`in` from Monday), replace every copy of it with its capital. `word = ` keeps the result. Without it, this is `answer.py` again and nothing changes.
+
+If anyone asks how the loop can keep going when `word` changes inside it: the `for` goes through the string `word` named when the loop **started**. `word = ...` points the name at a new string, but the original string was never changed (it can't be), so the loop carries on through its letters.
+
+### Way 2: loop over the vowels
 
 <details class="code-example" markdown="1">
-<summary>Live code — assigning the result of <code>sort</code></summary>
+<summary>Live code — <code>capvowels.py</code>, looping over the vowels</summary>
 
 ```python
->>> nums = [7, 4, 19, 12, 1]
->>> nums = nums.sort()
->>> print(nums)
-None
+word = input('Word: ')
+
+for vowel in 'aeiou':
+    word = word.replace(vowel, vowel.upper())
+
+print(word)
+```
+
+```
+Word: banana
+bAnAnA
 ```
 
 </details>
 
-`nums.sort()` sorted the list, then returned `None`, and `nums = ` pointed the name at that `None`. The sorted list is gone. This is one of the most common bugs in Python.
+Same answer, and no `if`. When a vowel isn't in the word, `replace` finds nothing to replace and returns the same string, so there is nothing to check.
 
-| string methods | list methods |
-| - | - |
-| `upper`, `lower`, `strip`, `replace`, `find` | `append`, `sort` |
-| return a **new value** | **change the list** |
-| the original is unchanged | return `None` |
-| **assign it:** `name = name.strip()` | **don't assign it:** `nums.sort()` |
+### How many times does each loop run?
 
-> **Ask:** what does each of these print?
-
-```python
-name = 'ana'
-name.upper()
-print(name)
-
-nums = [3, 1, 2]
-nums.sort()
-print(nums)
-
-nums = [3, 1, 2]
-nums = nums.sort()
-print(nums)
-```
+Add a counter, the Unit 3 counting pattern: start at `0` before the loop and add `1` every time the loop body runs.
 
 <details class="code-example" markdown="1">
-<summary>Answer</summary>
+<summary>Live code — Way 1 with a counter</summary>
+
+```python
+word = input('Word: ')
+count = 0
+
+for letter in word:
+    count = count + 1
+    if letter in 'aeiou':
+        word = word.replace(letter, letter.upper())
+
+print(word)
+print('Loop ran', count, 'times')
+```
 
 ```
-ana
-[1, 2, 3]
-None
+Word: banana
+bAnAnA
+Loop ran 6 times
 ```
 
-The first one returned `'ANA'`, but nobody kept it. The third one kept the return value, which was `None`.
+```
+Word: supercalifragilisticexpialidocious
+sUpErcAlIfrAgIlIstIcExpIAlIdOcIOUs
+Loop ran 34 times
+```
 
 </details>
+
+<details class="code-example" markdown="1">
+<summary>Live code — Way 2 with a counter</summary>
+
+```python
+word = input('Word: ')
+count = 0
+
+for vowel in 'aeiou':
+    count = count + 1
+    word = word.replace(vowel, vowel.upper())
+
+print(word)
+print('Loop ran', count, 'times')
+```
+
+```
+Word: banana
+bAnAnA
+Loop ran 5 times
+```
+
+```
+Word: supercalifragilisticexpialidocious
+sUpErcAlIfrAgIlIstIcExpIAlIdOcIOUs
+Loop ran 5 times
+```
+
+</details>
+
+| word | letters | Way 1 loops | Way 2 loops |
+| - | - | - | - |
+| `banana` | 6 | 6 | 5 |
+| `education` | 9 | 9 | 5 |
+| `supercalifragilisticexpialidocious` | 34 | 34 | 5 |
+
+- Way 1 runs **once per letter**, so the longer the word, the more times it runs.
+- Way 2 runs **once per vowel**: always 5 times, however long the word is.
+
+Both programs are correct. They do different amounts of work to get there. When you write a loop, it is worth asking: *what decides how many times this runs?*
 
 ---
 
-## 6. `sum`, `max` and `min`
-
-Python has built-in functions for three of the Unit 3 loop patterns. Like `len`, they are not methods: there is no dot, and the list goes inside the parentheses. They **return** a value.
-
-<details class="code-example" markdown="1">
-<summary>Live code — the built-ins</summary>
-
-```python
->>> nums = [7, 4, 19, 12, 1]
->>> sum(nums)
-43
->>> max(nums)
-19
->>> min(nums)
-1
->>> sum(nums) / len(nums)
-8.6
-```
-
-</details>
-
-`sum` is the summing loop. `max` and `min` are the largest and smallest loops. Python has already written them for you.
-
-Here is `above.py` from Lecture 09 again. The summing loop is gone, and we get the highest and lowest for free:
-
-<details class="code-example" markdown="1">
-<summary>Live code — <code>above.py</code> with the built-ins</summary>
-
-```python
-# above.py -- CSCI 131, Wednesday Oct 14
-
-scores = []
-line = input('Score (or done): ')
-
-while line != 'done':
-    scores.append(float(line))
-    line = input('Score (or done): ')
-
-if len(scores) > 0:
-    average = sum(scores) / len(scores)
-    print('Average:', average)
-    print('Highest:', max(scores))
-    print('Lowest:', min(scores))
-    print('Above average:')
-    for score in scores:
-        if score > average:
-            print(score)
-else:
-    print('No scores entered.')
-```
-
-```
-Score (or done): 70
-Score (or done): 92
-Score (or done): 85
-Score (or done): 64
-Score (or done): 79
-Score (or done): done
-Average: 78.0
-Highest: 92.0
-Lowest: 64.0
-Above average:
-92.0
-85.0
-79.0
-```
-
-</details>
-
-The `if len(scores) > 0` guard is still needed. An empty list has no largest item:
-
-<details class="code-example" markdown="1">
-<summary>Live code — <code>max</code> of an empty list</summary>
-
-```python
->>> max([])
-Traceback (most recent call last):
-  File "<pyshell#12>", line 1, in <module>
-    max([])
-ValueError: max() iterable argument is empty
-```
-
-</details>
-
-You may use `sum`, `max` and `min` on assignments and tests unless a problem says otherwise. They don't replace the loop patterns, though: there is no built-in that counts the scores over 90, adds up only the positive numbers, or tells you *where* the largest one is. The last loop in `above.py` is still a loop.
-
----
-
-## 7. Conclusion
+## 6. Conclusion
 
 | | string | list |
 | - | - | - |
 | change one item: `x[0] = ...` | `TypeError`; build a new string instead | works |
-| methods | return a new string; **assign** the result | change the list; return `None`; **don't assign** |
+| methods | return a new string; **assign** the result | next lecture |
 
 ```python
 nums[i] = value                 # put value at position i (lists only)
@@ -459,20 +431,12 @@ line = line.strip().lower()     # clean up input
 word.replace(old, new)          # returns a new string
 word.find(text)                 # returns a position, or -1
 
-nums.append(x)                  # list methods: don't assign
-nums.sort()
-
-total = sum(nums)               # built-ins: return a value
-highest = max(nums)
-lowest = min(nums)
+for vowel in 'aeiou':           # runs 5 times, whatever the word
+    word = word.replace(vowel, vowel.upper())
 ```
 
 - A list is **mutable** and a string is **immutable**.
 - `for item in x: item = ...` does **not** change the list. Loop over positions and assign to `x[i]`.
 - A call is replaced by the value it **returns**. Functions with nothing to return give back `None`.
 - String methods return a new string. If you don't assign it, it's lost.
-- List methods change the list and return `None`. If you assign it, the list is lost.
-- `sum`, `max` and `min` are the Unit 3 patterns, already written. `max` and `min` of an empty list are an error.
-
-
----
+- Two loops can give the same answer and run a different number of times. Looping over the word runs once per letter; looping over `'aeiou'` always runs 5 times.
