@@ -11,7 +11,7 @@ published: true
 
 ## 1. Where we left off
 
-Last Wednesday: strings are **immutable**, so a string method can't change the string. It returns a **new** string, and if you want to keep it, you have to assign it.
+Last time: strings are **immutable**, so a string method can't change the string. It returns a **new** string, and if you want to keep it, you have to assign it.
 
 > **Ask:** what does this print?
 
@@ -31,11 +31,10 @@ banana
 bonono
 ```
 
-`word.upper()` returned `'BANANA'`, and nobody kept it. The `replace` line kept its result.
+`word.upper()` returned `'BANANA'`, but it was never assigned to anything. The `replace` line kept its result.
 
 </details>
 
-Today is the other column of the table: lists are **mutable**, and that changes how their methods behave. Then we finish with two methods that get you from one column to the other.
 
 ---
 
@@ -72,7 +71,7 @@ None
 
 </details>
 
-`nums.sort()` sorted the list, then returned `None`, and `nums = ` pointed the name at that `None`. The sorted list is gone. This is one of the most common bugs in Python.
+`nums.sort()` sorted the list, then returned `None`, and `nums = ` pointed the name at that `None`. The sorted list is gone. 
 
 | string methods | list methods |
 | - | - |
@@ -114,7 +113,7 @@ The first one returned `'ANA'`, but nobody kept it. The third one kept the retur
 
 ## 3. `sum`, `max` and `min`
 
-Python has built-in functions for three of the Unit 3 loop patterns. Like `len`, they are not methods: there is no dot, and the list goes inside the parentheses. They **return** a value.
+Python has **built-in functions** for three of the Unit 3 loop patterns. Like `len`, they are not methods: there is no dot, and the list goes inside the parentheses. They **return** a value.
 
 <details class="code-example" markdown="1">
 <summary>Live code — the built-ins</summary>
@@ -133,7 +132,7 @@ Python has built-in functions for three of the Unit 3 loop patterns. Like `len`,
 
 </details>
 
-`sum` is the summing loop. `max` and `min` are the largest and smallest loops. Python has already written them for you. On Friday's `curve.py` you needed the highest score: `max(scores)` is that loop in one call.
+`sum` is the summing loop. `max` and `min` are the largest and smallest loops. 
 
 Here is `above.py` from Lecture 09 again. The summing loop is gone, and we get the highest and lowest for free:
 
@@ -196,28 +195,28 @@ ValueError: max() iterable argument is empty
 
 </details>
 
-You may use `sum`, `max` and `min` on assignments and tests unless a problem says otherwise. They don't replace the loop patterns, though: there is no built-in that counts the scores over 90, adds up only the positive numbers, or tells you *where* the largest one is. The last loop in `above.py` is still a loop.
+You may use `sum`, `max` and `min` on assignments and tests unless a problem says otherwise. They can't always replace the loop patterns, though: there is no built-in that counts the scores over 90, adds up only the positive numbers, or tells you *where* the largest one is.
 
 ---
 
 ## 4. `split`: from a string to a list
 
-So far we have kept the two columns of the table apart. The last two tools go **between** them. `split` is a string method that breaks a string into pieces and returns them as a **list**.
+So far we have talked about strings and lists separately. The last two tools go **between** them. `split` is a string method that breaks a string into pieces and returns them as a **list**.
 
 <details class="code-example" markdown="1">
 <summary>Live code — splitting a sentence into words</summary>
 
 ```python
->>> sentence = 'the quick brown fox'
+>>> sentence = 'Sphinx of black quartz, judge my vow'
 >>> words = sentence.split()
 >>> words
-['the', 'quick', 'brown', 'fox']
+['Sphinx', 'of', 'black', 'quartz,', 'judge', 'my', 'vow']
 >>> len(words)
-4
+7
 >>> words[0]
-'the'
+'Sphinx'
 >>> words[-1]
-'fox'
+'vow'
 ```
 
 </details>
@@ -312,17 +311,17 @@ There is nothing after the last comma, so the last piece is the **empty string**
 
 ## 5. `join`: from a list to a string
 
-`join` goes the other way: it takes a list of strings and glues them together into **one string**. It looks backwards, because you call it on the **glue**, and the list goes in the parentheses:
+`join` goes the other way: it takes a list of strings and glues them together into **one string**.
 
 <details class="code-example" markdown="1">
 <summary>Live code — <code>join</code></summary>
 
 ```python
->>> words = ['the', 'quick', 'brown', 'fox']
+>>> words = ['Sphinx', 'of', 'black', 'quartz,', 'judge', 'my', 'vow']
 >>> ' '.join(words)
-'the quick brown fox'
+'Sphinx of black quartz, judge my vow'
 >>> '-'.join(words)
-'the-quick-brown-fox'
+'Sphinx-of-black-quartz,-judge-my-vow'
 >>> ', '.join(['Ana', 'Ben', 'Carla'])
 'Ana, Ben, Carla'
 >>> ''.join(['c', 'a', 't'])
@@ -332,9 +331,7 @@ There is nothing after the last comma, so the last piece is the **empty string**
 </details>
 
 - Read `', '.join(names)` as *join the names, with `', '` between each pair*.
-- The glue goes **between** the items, not after the last one.
-- `''` as the glue means nothing between them, so the items are stuck straight together.
-- `join` is a string method (it belongs to the glue), so it **returns a new string**. Assign it if you want to keep it.
+- `join` is a string method (it belongs to the string that goes between items in the list), so it **returns a new string**. Assign it if you want to keep it.
 
 Every item in the list has to be a string:
 
@@ -394,7 +391,7 @@ The last one is `'3' + '1'`: the pieces from `split` are strings, so `+` sticks 
 | - | - | - |
 | change one item: `x[0] = ...` | `TypeError`; build a new string instead | works |
 | methods | return a new string; **assign** the result | change the list; return `None`; **don't assign** |
-| convert | `x.split()` gives a list of strings | `glue.join(x)` gives a string |
+| convert | `x.split()` turns a string into a list | `glue.join(x)` turns a list into a string |
 
 ```python
 name = name.strip()             # string methods: assign the result
@@ -417,4 +414,4 @@ line = ', '.join(names)         # list of strings -> string, glue between
 - String methods are the opposite: they return a new string. If you don't assign it, it's lost.
 - `sum`, `max` and `min` are the Unit 3 patterns, already written. `max` and `min` of an empty list are an error.
 - `split` turns a string into a list of **strings**. Convert the pieces with `int` or `float` before doing arithmetic.
-- `join` is called on the glue: `', '.join(names)`. Every item has to be a string.
+- `join` is called on the 'glue': `', '.join(names)`. Every item has to be a string.
