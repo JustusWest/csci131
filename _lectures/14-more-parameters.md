@@ -46,6 +46,7 @@ The `def` prints nothing. `banner('Hi')` starts with `word = 'Hi'`, jumps into t
 - the **argument** of a function is the value inside the `()` when you *call* the function i.e. `Hi` in `banner('Hi')`
 
 Now we look in more depth at parameters, what happens when we have more than one and when the parameter is a list.
+
 ---
 
 ## 2. More than one parameter
@@ -114,7 +115,7 @@ TypeError: banner() takes 1 positional argument but 2 were given
 
 ## 3. A list as an argument
 
-A parameter can hold any value, including a list. This one prints a numbered list, using a loop over positions from Lecture 10:
+A parameter can hold any value, including a list. This one prints a numbered list using a loop
 
 <details class="code-example" markdown="1">
 <summary>Live code — <code>show_list</code></summary>
