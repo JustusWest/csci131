@@ -1,0 +1,138 @@
+# =====================================================================
+# Lecture 13: Defining Functions (Monday, October 26)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. Writing a function: def — menu.py, first try
+# ---------------------------------------------------------------------
+
+# menu.py -- CSCI 131, Monday Oct 26
+
+def show_menu():
+    print('1. Add a score')
+    print('2. Show the average')
+    print('3. Quit')
+
+
+# ---------------------------------------------------------------------
+# 2. Writing a function: def — menu.py, with a call
+# ---------------------------------------------------------------------
+
+# menu.py -- CSCI 131, Monday Oct 26
+
+def show_menu():
+    print('1. Add a score')
+    print('2. Show the average')
+    print('3. Quit')
+
+show_menu()
+
+# Output:
+# 1. Add a score
+# 2. Show the average
+# 3. Quit
+
+
+# ---------------------------------------------------------------------
+# 3. Flow of execution — menu.py, with lines around the call
+# ---------------------------------------------------------------------
+
+# menu.py -- CSCI 131, Monday Oct 26
+
+def show_menu():
+    print('1. Add a score')
+    print('2. Show the average')
+    print('3. Quit')
+
+print('Welcome!')
+show_menu()
+print('Pick one.')
+
+# Output:
+# Welcome!
+# 1. Add a score
+# 2. Show the average
+# 3. Quit
+# Pick one.
+
+
+# ---------------------------------------------------------------------
+# 4. Define it before you call it — calling before the def
+# ---------------------------------------------------------------------
+
+show_menu()
+
+def show_menu():
+    print('1. Add a score')
+    print('2. Show the average')
+    print('3. Quit')
+
+# Output:
+# Traceback (most recent call last):
+#   File "menu.py", line 1, in <module>
+#     show_menu()
+# NameError: name 'show_menu' is not defined
+
+
+# ---------------------------------------------------------------------
+# 5. Parameters — banner.py
+# ---------------------------------------------------------------------
+
+# banner.py -- CSCI 131, Monday Oct 26
+
+def banner(word):
+    line = '=' * len(word)
+    print(line)
+    print(word)
+    print(line)
+
+banner('Widener')
+banner('CSCI 131')
+
+# Output:
+# =======
+# Widener
+# =======
+# ========
+# CSCI 131
+# ========
+
+
+# ---------------------------------------------------------------------
+# 6. The argument's name doesn't matter — variables as arguments
+# ---------------------------------------------------------------------
+
+school = 'Widener'
+banner(school)
+banner(school + ' Pride')
+
+# Output:
+# =======
+# Widener
+# =======
+# =============
+# Widener Pride
+# =============
+
+
+# ---------------------------------------------------------------------
+# 7. Exercise solution (box.py)
+# ---------------------------------------------------------------------
+
+# box.py -- CSCI 131, Monday Oct 26
+
+def box(word):
+    edge = '*' * (len(word) + 4)
+    print(edge)
+    print('* ' + word + ' *')
+    print(edge)
+
+box('Widener')
+box('Python')
+
+name = input('Your name: ')
+box(name)

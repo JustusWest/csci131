@@ -1,0 +1,156 @@
+# =====================================================================
+# Lecture 11: Changing Sequences: Methods and Return Values (Wednesday, October 14)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. Changing every item in a list — bonus.py, first try
+# ---------------------------------------------------------------------
+
+# bonus.py -- CSCI 131, Wednesday Oct 14
+
+scores = [70, 92, 85, 64, 79]
+
+for score in scores:
+    score = score + 5
+
+print(scores)
+
+# Output:
+# [70, 92, 85, 64, 79]
+
+
+# ---------------------------------------------------------------------
+# 2. Changing every item in a list — bonus.py, working
+# ---------------------------------------------------------------------
+
+scores = [70, 92, 85, 64, 79]
+
+for i in range(len(scores)):
+    scores[i] = scores[i] + 5
+
+print(scores)
+
+# Output:
+# [75, 97, 90, 69, 84]
+
+
+# ---------------------------------------------------------------------
+# 3. The original doesn't change — answer.py, first try
+# ---------------------------------------------------------------------
+
+# answer.py -- CSCI 131, Wednesday Oct 14
+
+answer = input('Keep going? ')
+answer.strip()
+answer.lower()
+print('[' + answer + ']')
+
+if answer == 'yes':
+    print('OK, keep going.')
+else:
+    print('Stopping.')
+
+# Output:
+# Keep going?   YES
+# [  YES ]
+# Stopping.
+
+
+# ---------------------------------------------------------------------
+# 4. The original doesn't change — answer.py, working
+# ---------------------------------------------------------------------
+
+answer = input('Keep going? ')
+answer = answer.strip()
+answer = answer.lower()
+print('[' + answer + ']')
+
+if answer == 'yes':
+    print('OK, keep going.')
+else:
+    print('Stopping.')
+
+# Output:
+# Keep going?   YES
+# [yes]
+# OK, keep going.
+
+
+# ---------------------------------------------------------------------
+# 5. Way 1: loop over the word — capvowels.py, looping over the word
+# ---------------------------------------------------------------------
+
+# capvowels.py -- CSCI 131, Wednesday Oct 14
+
+word = input('Word: ')
+
+for letter in word:
+    if letter in 'aeiou':
+        word = word.replace(letter, letter.upper())
+
+print(word)
+
+# Output:
+# Word: banana
+# bAnAnA
+
+
+# ---------------------------------------------------------------------
+# 6. Way 2: loop over the vowels — capvowels.py, looping over the vowels
+# ---------------------------------------------------------------------
+
+word = input('Word: ')
+
+for vowel in 'aeiou':
+    word = word.replace(vowel, vowel.upper())
+
+print(word)
+
+# Output:
+# Word: banana
+# bAnAnA
+
+
+# ---------------------------------------------------------------------
+# 7. How many times does each loop run? — Way 1 with a counter
+# ---------------------------------------------------------------------
+
+word = input('Word: ')
+count = 0
+
+for letter in word:
+    count = count + 1
+    if letter in 'aeiou':
+        word = word.replace(letter, letter.upper())
+
+print(word)
+print('Loop ran', count, 'times')
+
+# Output:
+# Word: banana
+# bAnAnA
+# Loop ran 6 times
+
+
+# ---------------------------------------------------------------------
+# 8. How many times does each loop run? — Way 2 with a counter
+# ---------------------------------------------------------------------
+
+word = input('Word: ')
+count = 0
+
+for vowel in 'aeiou':
+    count = count + 1
+    word = word.replace(vowel, vowel.upper())
+
+print(word)
+print('Loop ran', count, 'times')
+
+# Output:
+# Word: banana
+# bAnAnA
+# Loop ran 5 times

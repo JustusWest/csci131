@@ -1,0 +1,64 @@
+# =====================================================================
+# Lecture 03: Remainders, Powers, and Strings (Friday, September 4)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. Putting it together — seconds.py, stage 1
+# ---------------------------------------------------------------------
+
+# seconds.py -- CSCI 131, Friday Sept 4
+
+total = int(input('Total seconds: '))
+
+hours = total // 3600
+print('Hours:', hours)
+
+# Output:
+# Total seconds: 3725
+# Hours: 1
+
+
+# ---------------------------------------------------------------------
+# 2. Putting it together — seconds.py, stage 2
+# ---------------------------------------------------------------------
+
+total = int(input('Total seconds: '))
+
+hours = total // 3600
+total = total % 3600          # <-- keep only what the hours did not use
+
+minutes = total // 60
+print('Hours:', hours)
+print('Minutes:', minutes)
+
+# Output:
+# Total seconds: 3725
+# Hours: 1
+# Minutes: 2
+
+
+# ---------------------------------------------------------------------
+# 3. Putting it together — the finished seconds.py
+# ---------------------------------------------------------------------
+
+total = int(input('Total seconds: '))
+
+hours = total // 3600
+total = total % 3600
+
+minutes = total // 60
+total = total % 60
+
+print('Hours:', hours)
+print('Minutes:', minutes)
+print('Seconds:', total)
+
+# Output:
+# Total seconds: 3725
+# Hours: 1
+# Minutes: 2
+# Seconds: 5

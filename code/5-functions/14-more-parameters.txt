@@ -1,0 +1,100 @@
+# =====================================================================
+# Lecture 14: More Parameters, and Lists as Arguments (Wednesday, October 28)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. More than one parameter — banner.py, adding repeat
+# ---------------------------------------------------------------------
+
+def repeat(word, n):
+    for i in range(n):
+        print(word)
+
+repeat('Go Pride!', 3)
+
+# Output:
+# Go Pride!
+# Go Pride!
+# Go Pride!
+
+
+# ---------------------------------------------------------------------
+# 2. A list as an argument — show_list
+# ---------------------------------------------------------------------
+
+def show_list(items):
+    for i in range(len(items)):
+        print(i + 1, items[i])
+
+groceries = ['eggs', 'milk', 'bread']
+show_list(groceries)
+
+# Output:
+# 1 eggs
+# 2 milk
+# 3 bread
+
+
+# ---------------------------------------------------------------------
+# 3. Putting it together — roster.py
+# ---------------------------------------------------------------------
+
+# roster.py -- CSCI 131, Wednesday Oct 28
+
+def banner(word):
+    line = '=' * len(word)
+    print(line)
+    print(word)
+    print(line)
+
+def show_list(items):
+    for i in range(len(items)):
+        print(i + 1, items[i])
+
+names = []
+name = input('Name (or done): ')
+
+while name != 'done':
+    names.append(name)
+    name = input('Name (or done): ')
+
+banner('Roster')
+show_list(names)
+
+# Output:
+# Name (or done): Ana
+# Name (or done): Ben
+# Name (or done): Carla
+# Name (or done): done
+# ======
+# Roster
+# ======
+# 1 Ana
+# 2 Ben
+# 3 Carla
+
+
+# ---------------------------------------------------------------------
+# 4. Exercise solution (above.py)
+# ---------------------------------------------------------------------
+
+# above.py -- CSCI 131, Wednesday Oct 28
+
+def show_above(scores, limit):
+    for score in scores:
+        if score > limit:
+            print(score)
+
+scores = []
+line = input('Score (or done): ')
+
+while line != 'done':
+    scores.append(int(line))
+    line = input('Score (or done): ')
+
+limit = int(input('Limit: '))
+show_above(scores, limit)

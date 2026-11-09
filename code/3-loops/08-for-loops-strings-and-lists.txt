@@ -1,0 +1,185 @@
+# =====================================================================
+# Lecture 08: for Loops, Strings, and Lists (Wednesday, September 30)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. Review — countdown.py
+# ---------------------------------------------------------------------
+
+n = int(input('Count down from: '))
+
+while n > 0:
+    print(n)
+    n = n - 1
+
+print('Done.')
+
+# Output:
+# Count down from: 3
+# 3
+# 2
+# 1
+# Done.
+
+
+# ---------------------------------------------------------------------
+# 2. for — once for each item — friends.py
+# ---------------------------------------------------------------------
+
+
+friends = ['Joseph', 'Glenn', 'Sally']
+
+for friend in friends:
+    print('Happy New Year:', friend)
+
+print('Done!')
+
+# Output:
+# Happy New Year: Joseph
+# Happy New Year: Glenn
+# Happy New Year: Sally
+# Done!
+
+
+# ---------------------------------------------------------------------
+# 3. Adding up a list — sum_list.py
+# ---------------------------------------------------------------------
+
+# sum_list.py -- CSCI 131, Wednesday Sept 30
+
+nums = [4, 10, 7]
+total = 0
+
+for num in nums:
+    total = total + num
+
+print('Total:', total)
+print('Average:', total / len(nums))
+
+# Output:
+# Total: 21
+# Average: 7.0
+
+
+# ---------------------------------------------------------------------
+# 4. range — do something n times — looping over a number
+# ---------------------------------------------------------------------
+
+for i in 5:
+    print('Hello')
+
+# Output:
+# Traceback (most recent call last):
+#   File "hello.py", line 1, in <module>
+#     for i in 5:
+# TypeError: 'int' object is not iterable
+
+
+# ---------------------------------------------------------------------
+# 5. range — do something n times — range(n)
+# ---------------------------------------------------------------------
+
+for i in range(5):
+    print(i)
+
+# Output:
+# 0
+# 1
+# 2
+# 3
+# 4
+
+
+# ---------------------------------------------------------------------
+# 6. range — do something n times — range(a, b)
+# ---------------------------------------------------------------------
+
+for i in range(1, 6):
+    print(i, 'squared is', i ** 2)
+
+# Output:
+# 1 squared is 1
+# 2 squared is 4
+# 3 squared is 9
+# 4 squared is 16
+# 5 squared is 25
+
+
+# ---------------------------------------------------------------------
+# 7. for or while? — sum_to_n.py with while
+# ---------------------------------------------------------------------
+
+# sum_to_n.py -- CSCI 131, Wednesday Sept 30
+
+n = int(input('n: '))
+total = 0
+i = 1
+
+while i <= n:
+    total = total + i
+    i = i + 1
+
+print('Total:', total)
+
+# Output:
+# n: 10
+# Total: 55
+
+
+# ---------------------------------------------------------------------
+# 8. for or while? — sum_to_n.py with for
+# ---------------------------------------------------------------------
+
+n = int(input('n: '))
+total = 0
+
+for i in range(1, n + 1):
+    total = total + i
+
+print('Total:', total)
+
+# Output:
+# n: 10
+# Total: 55
+
+
+# ---------------------------------------------------------------------
+# 9. Looping over a string — for over a string
+# ---------------------------------------------------------------------
+
+word = 'banana'
+
+for ch in word:
+    print(ch)
+
+# Output:
+# b
+# a
+# n
+# a
+# n
+# a
+
+
+# ---------------------------------------------------------------------
+# 10. Counting a letter — count_a.py
+# ---------------------------------------------------------------------
+
+# count_a.py -- CSCI 131, Wednesday Sept 30
+
+word = input('Word: ')
+count = 0
+
+for ch in word:
+    if ch == 'a':
+        count = count + 1
+
+print('Number of a:', count)
+
+# Output:
+# Word: banana
+# Number of a: 3

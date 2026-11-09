@@ -1,0 +1,273 @@
+# =====================================================================
+# Lecture 07: while Loops (Monday, September 28)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. Review — an if runs its block once
+# ---------------------------------------------------------------------
+
+n = 3
+
+if n > 0:
+    print(n)
+    n = n - 1
+
+print('Done.')
+
+# Output:
+# 3
+# Done.
+
+
+# ---------------------------------------------------------------------
+# 2. while — an if that repeats — the same program with while
+# ---------------------------------------------------------------------
+
+n = 3
+
+while n > 0:
+    print(n)
+    n = n - 1
+
+print('Done.')
+
+# Output:
+# 3
+# 2
+# 1
+# Done.
+
+
+# ---------------------------------------------------------------------
+# 3. countdown.py
+# ---------------------------------------------------------------------
+
+# countdown.py -- CSCI 131, Monday Sept 28
+
+n = int(input('Count down from: '))
+
+while n > 0:
+    print(n)
+    n = n - 1
+
+print('Done.')
+
+# Output:
+# Count down from: 5
+# 5
+# 4
+# 3
+# 2
+# 1
+# Done.
+
+
+# ---------------------------------------------------------------------
+# 4. It never stops — the infinite loop
+# ---------------------------------------------------------------------
+
+n = int(input('Count down from: '))
+
+while n > 0:
+    print(n)
+
+print('Blastoff!')
+
+# Output:
+# Count down from: 3
+# 3
+# 3
+# 3
+# 3
+# 3
+# ...
+
+
+# ---------------------------------------------------------------------
+# 5. It runs once too many (or too few) — >= instead of >
+# ---------------------------------------------------------------------
+
+n = int(input('Count down from: '))
+
+while n >= 0:
+    print(n)
+    n = n - 1
+
+print('Done')
+
+# Output:
+# Count down from: 3
+# 3
+# 2
+# 1
+# 0
+# Blastoff!
+
+
+# ---------------------------------------------------------------------
+# 6. Loops that wait for the user — password.py
+# ---------------------------------------------------------------------
+
+# password.py
+
+password = input('Password: ')
+
+while password != 'swordfish':
+    print('Wrong, try again.')
+    password = input('Password: ')
+
+print('Welcome!')
+
+# Output:
+# Password: hello
+# Wrong, try again.
+# Password: Swordfish
+# Wrong, try again.
+# Password: swordfish
+# Welcome!
+
+
+# ---------------------------------------------------------------------
+# 7. Loops that wait for the user — age.py
+# ---------------------------------------------------------------------
+
+age = int(input('Age: '))
+
+while age < 0 or age > 120:
+    print('That is not a real age.')
+    age = int(input('Age: '))
+
+print('Thank you.')
+
+# Output:
+# Age: 200
+# That is not a real age.
+# Age: -3
+# That is not a real age.
+# Age: 19
+# Thank you.
+
+
+# ---------------------------------------------------------------------
+# 8. Putting it together — total.py — stage 1: read until done
+# ---------------------------------------------------------------------
+
+# total.py -- CSCI 131, Monday Sept 28
+
+line = input('Number (or done): ')
+
+while line != 'done':
+    print('You typed', line)
+    line = input('Number (or done): ')
+
+print('Finished.')
+
+# Output:
+# Number (or done): 4
+# You typed 4
+# Number (or done): 10
+# You typed 10
+# Number (or done): 7
+# You typed 7
+# Number (or done): done
+# Finished.
+
+
+# ---------------------------------------------------------------------
+# 9. Putting it together — total.py — converting too early
+# ---------------------------------------------------------------------
+
+num = float(input('Number (or done): '))
+
+# Output:
+# Number (or done): done
+# Traceback (most recent call last):
+#   File "total.py", line 1, in <module>
+#     num = float(input('Number (or done): '))
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# ValueError: could not convert string to float: 'done'
+
+
+# ---------------------------------------------------------------------
+# 10. Putting it together — total.py — stage 2: keep a running total
+# ---------------------------------------------------------------------
+
+total = 0
+line = input('Number (or done): ')
+
+while line != 'done':
+    total = total + float(line)
+    line = input('Number (or done): ')
+
+print('Total:', total)
+
+# Output:
+# Number (or done): 4
+# Number (or done): 10
+# Number (or done): 7
+# Number (or done): done
+# Total: 21.0
+
+
+# ---------------------------------------------------------------------
+# 11. Putting it together — total.py — stage 3: count them and average
+# ---------------------------------------------------------------------
+
+total = 0
+count = 0
+line = input('Number (or done): ')
+
+while line != 'done':
+    total = total + float(line)
+    count = count + 1
+    line = input('Number (or done): ')
+
+print('Count:', count)
+print('Total:', total)
+print('Average:', total / count)
+
+# Output:
+# Number (or done): 4
+# Number (or done): 10
+# Number (or done): 7
+# Number (or done): done
+# Count: 3
+# Total: 21.0
+# Average: 7.0
+
+
+# ---------------------------------------------------------------------
+# 12. Putting it together — total.py — total.py, finished
+# ---------------------------------------------------------------------
+
+# total.py -- CSCI 131, Monday Sept 28
+
+total = 0
+count = 0
+line = input('Number (or done): ')
+
+while line != 'done':
+    total = total + float(line)
+    count = count + 1
+    line = input('Number (or done): ')
+
+print('Count:', count)
+print('Total:', total)
+
+if count > 0:
+    print('Average:', total / count)
+else:
+    print('No numbers entered.')
+
+# Output:
+# Number (or done): 4
+# Number (or done): 10
+# Number (or done): 7
+# Number (or done): done
+# Count: 3
+# Total: 21.0
+# Average: 7.0

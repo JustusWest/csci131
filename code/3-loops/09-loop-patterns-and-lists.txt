@@ -1,0 +1,127 @@
+# =====================================================================
+# Lecture 09: Loop Patterns and Building a List (Monday, October 5)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. Loop Structures — steps.py
+# ---------------------------------------------------------------------
+
+# steps.py -- CSCI 131, Monday Oct 5
+
+steps = [8200, 4500, 10300, 6100, 12000, 9800, 3000]
+
+count = 0
+for s in steps:
+    if s >= 10000:
+        count = count + 1
+
+total = 0
+for s in steps:
+    total = total + s
+
+print('Days over 10,000:', count)
+print('Total steps:', total)
+print('Average:', total / len(steps))
+
+# Output:
+# Days over 10,000: 2
+# Total steps: 53900
+# Average: 7700.0
+
+
+# ---------------------------------------------------------------------
+# 2. Searching Loops — minmax.py, first try
+# ---------------------------------------------------------------------
+
+# minmax.py -- CSCI 131, Monday Oct 5
+
+
+nums = [7, 4, 19, 12, 1]
+largest = 0
+smallest = 0
+
+for num in nums:
+    if num > largest:
+        largest = num
+    if num < smallest:
+        smallest = num
+
+print('Largest:', largest)
+print('Smallest:', smallest)
+
+# Output:
+# Largest: 19
+# Smallest: 0
+
+
+# ---------------------------------------------------------------------
+# 3. Searching — search.py
+# ---------------------------------------------------------------------
+
+# search.py -- CSCI 131, Monday Oct 5
+
+changes = [120, -40, 75, -15, 200]
+
+found = False
+for c in changes:
+    print('Checking', c)
+    if c < 0:
+        found = True
+
+if found:
+    print('There was a withdrawal.')
+else:
+    print('No withdrawals.')
+
+# Output:
+# Checking 120
+# Checking -40
+# Checking 75
+# Checking -15
+# Checking 200
+# There was a withdrawal.
+
+
+# ---------------------------------------------------------------------
+# 4. Building a list — above.py
+# ---------------------------------------------------------------------
+
+# above.py -- CSCI 131, Monday Oct 5
+
+scores = []
+line = input('Score (or done): ')
+
+while line != 'done':
+    scores.append(float(line))
+    line = input('Score (or done): ')
+
+total = 0
+for score in scores:
+    total = total + score
+
+if len(scores) > 0:
+    average = total / len(scores)
+    print('Average:', average)
+    print('Above average:')
+    for score in scores:
+        if score > average:
+            print(score)
+else:
+    print('No scores entered.')
+
+# Output:
+# Score (or done): 70
+# Score (or done): 92
+# Score (or done): 85
+# Score (or done): 64
+# Score (or done): 79
+# Score (or done): done
+# Average: 78.0
+# Above average:
+# 92.0
+# 85.0
+# 79.0

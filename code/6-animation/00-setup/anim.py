@@ -65,8 +65,8 @@ Keyboard
 
 Step mode
     win = Window(600, 400, step=True)
-    Each win.show() waits until you press the SPACE BAR, and the title bar
-    shows the frame number.  Print your variables each frame and you can
+    Each win.show() waits until you press the SPACE BAR (or click in the
+    window), and the title bar shows the frame number.  Print your variables each frame and you can
     check your trace table one frame at a time.
 """
 
@@ -110,6 +110,8 @@ class Window:
         self._keys_down = set()
         self._keys_pressed = set()
         self._space_for_step = False
+        self._waiting_for_step = False
+        self._step_hint_shown = False
 
         self._root = tk.Tk()
         self._root.title(self._title)
@@ -378,11 +380,17 @@ class Window:
             time.sleep(min(left, 0.02))
 
     def _wait_for_space(self):
+        if not self._step_hint_shown:
+            print('[anim] Step mode: click the window, then press SPACE '
+                  '(or click again) for each frame.')
+            self._step_hint_shown = True
         self._root.title(self._title + '  (frame ' + str(self._frame) +
-                         ', press SPACE for the next frame)')
+                         ': press SPACE or click for the next frame)')
         self._space_for_step = False
+        self._waiting_for_step = True
         while self._pump() and not self._space_for_step:
             time.sleep(0.01)
+        self._waiting_for_step = False
         self._space_for_step = False
         # a step-mode space press shouldn't also count as the program's own key press
         self._keys_pressed.discard('space')
@@ -422,6 +430,16 @@ class Window:
             pass
 
     def _on_click(self, event):
+        # Clicking gives the window the keyboard (needed on macOS, where
+        # a new window often isn't the active one).
+        try:
+            self._canvas.focus_force()
+        except tk.TclError:
+            pass
+        if self._waiting_for_step:
+            # in step mode, a click means "next frame", not a program click
+            self._space_for_step = True
+            return
         self._clicked = True
         self._click_x = event.x
         self._click_y = event.y

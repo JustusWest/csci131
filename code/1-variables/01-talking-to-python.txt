@@ -1,0 +1,56 @@
+# =====================================================================
+# Lecture 01: Talking to Python: the Interpreter, Types, and Errors (Wednesday, August 26)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. Error Messages — three errors, on purpose
+# ---------------------------------------------------------------------
+
+print('hello'
+print('world')
+
+# Output:
+#   File "first.py", line 1
+#     print('hello'
+#          ^
+# SyntaxError: '(' was never closed
+
+
+# ---------------------------------------------------------------------
+# 2. Our first program — hello.py
+# ---------------------------------------------------------------------
+
+print('Hello, World!')
+
+# Output:
+# Hello, World!
+
+
+# ---------------------------------------------------------------------
+# 3. Our first program
+# ---------------------------------------------------------------------
+
+2 + 3
+'Hello again'
+
+
+# ---------------------------------------------------------------------
+# 4. Our first program
+# ---------------------------------------------------------------------
+
+print(2 + 3)
+print('Hello', 'again')
+
+
+# ---------------------------------------------------------------------
+# 5. Comments
+# ---------------------------------------------------------------------
+
+# hello.py -- my first program
+# Dr. West, CSCI 131
+
+print('Hello, World!')   # this part greets the world

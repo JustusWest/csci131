@@ -1,0 +1,153 @@
+# =====================================================================
+# Lecture 06: Nested Conditions and Logical Operators (Monday, September 21)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. Nested conditionals — teen.py
+# ---------------------------------------------------------------------
+
+age = int(input('Age: '))
+
+if age >= 13:
+    if age <= 19:
+        print('Teenager')
+
+print('Done.')
+
+# Output:
+# Age: 15
+# Teenager
+# Done.
+
+
+# ---------------------------------------------------------------------
+# 2. Nested conditionals — an else at each level
+# ---------------------------------------------------------------------
+
+age = int(input('Age: '))
+
+if age >= 13:
+    if age <= 19:
+        print('Teenager')
+    else:
+        print('Adult')
+else:
+    print('Child')
+
+# Output:
+# Age: 40
+# Adult
+
+
+# ---------------------------------------------------------------------
+# 3. and — the same program with and
+# ---------------------------------------------------------------------
+
+age = int(input('Age: '))
+
+if age >= 13 and age <= 19:
+    print('Teenager')
+
+print('Done.')
+
+# Output:
+# Age: 15
+# Teenager
+# Done.
+
+
+# ---------------------------------------------------------------------
+# 4. or — nesting
+# ---------------------------------------------------------------------
+
+day = input('Day: ')
+
+if day == 'Saturday':
+    print('Weekend')
+else:
+    if day == 'Sunday':
+        print('Weekend')
+
+# Output:
+# Day: Sunday
+# Weekend
+
+
+# ---------------------------------------------------------------------
+# 5. or — the same program with or
+# ---------------------------------------------------------------------
+
+day = input('Day: ')
+
+if day == 'Saturday' or day == 'Sunday':
+    print('Weekend')
+
+# Output:
+# Day: Saturday
+# Weekend
+
+
+# ---------------------------------------------------------------------
+# 6. Order of operations, one more time — logical order
+# ---------------------------------------------------------------------
+
+age = 70
+day = 'Friday'
+
+if age >= 65 or age <= 12 and day == 'Tuesday':
+    print('Discount')
+
+# Output:
+# Discount
+
+
+# ---------------------------------------------------------------------
+# 7. Order of operations, one more time — logical order
+# ---------------------------------------------------------------------
+
+if (age >= 65 or age <= 12) and day == 'Tuesday':
+    print('Discount')
+
+
+# ---------------------------------------------------------------------
+# 8. Putting it together — ride.py
+# ---------------------------------------------------------------------
+
+
+height = int(input('Height in inches: '))
+age = int(input('Age: '))
+adult = input('With an adult (yes/no)? ')
+
+if height >= 48 and (age >= 8 or adult == 'yes'):
+    print('You may ride.')
+else:
+    print('Sorry, not this time.')
+
+# Output:
+# Height in inches: 52
+# Age: 10
+# With an adult (yes/no)? no
+# You may ride.
+
+
+# ---------------------------------------------------------------------
+# 9. Nesting anyway — ride.py, nested for better messages
+# ---------------------------------------------------------------------
+
+if height >= 48:
+    if age >= 8 or adult == 'yes':
+        print('You may ride.')
+    else:
+        print('Riders under 8 must be with an adult.')
+else:
+    print('You must be 48 inches tall to ride.')
+
+# Output:
+# Height in inches: 50
+# Age: 6
+# With an adult (yes/no)? no
+# Riders under 8 must be with an adult.

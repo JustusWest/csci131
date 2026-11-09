@@ -1,0 +1,175 @@
+# =====================================================================
+# Lecture 15: Return Values (Monday, November 2)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. From last time — letters.py, from PA9
+# ---------------------------------------------------------------------
+
+# letters.py -- CSCI 131, Monday Nov 2
+
+def count_letter(word, letter):
+    count = 0
+    for ch in word:
+        if ch == letter:
+            count = count + 1
+    print(letter, 'appears', count, 'times in', word)
+
+count_letter('banana', 'a')
+
+# Output:
+# a appears 3 times in banana
+
+
+# ---------------------------------------------------------------------
+# 2. return — addtwo
+# ---------------------------------------------------------------------
+
+def addtwo(a, b):
+    added = a + b
+    return added
+
+x = addtwo(3, 5)
+print(x)
+
+# Output:
+# 8
+
+
+# ---------------------------------------------------------------------
+# 3. return — average.py
+# ---------------------------------------------------------------------
+
+# average.py -- CSCI 131, Monday Nov 2
+
+def average(nums):
+    return sum(nums) / len(nums)
+
+scores = [88, 92, 75]
+avg = average(scores)
+print(avg)
+
+# Output:
+# 85.0
+
+
+# ---------------------------------------------------------------------
+# 4. Using the returned value — average.py, using the value
+# ---------------------------------------------------------------------
+
+# average.py -- CSCI 131, Monday Nov 2
+
+def average(nums):
+    return sum(nums) / len(nums)
+
+scores = [88, 92, 75]
+print('Average:', average(scores))
+print('With a 5 point curve:', average(scores) + 5)
+
+if average(scores) > 80:
+    print('Honor roll')
+
+# Output:
+# Average: 85.0
+# With a 5 point curve: 90.0
+# Honor roll
+
+
+# ---------------------------------------------------------------------
+# 5. A function that returns a string — initials
+# ---------------------------------------------------------------------
+
+def initials(first, last):
+    return first[0].upper() + '.' + last[0].upper() + '.'
+
+print(initials('michael', 'west'))
+print(initials('Ada', 'lovelace'))
+
+# Output:
+# M.W.
+# A.L.
+
+
+# ---------------------------------------------------------------------
+# 6. return ends the function — grade.py
+# ---------------------------------------------------------------------
+
+# grade.py -- CSCI 131, Monday Nov 2
+
+def letter_grade(score):
+    if score >= 90:
+        return 'A'
+    elif score >= 80:
+        return 'B'
+    elif score >= 70:
+        return 'C'
+    elif score >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+print(letter_grade(95))
+print(letter_grade(72))
+print(letter_grade(59))
+
+# Output:
+# A
+# C
+# F
+
+
+# ---------------------------------------------------------------------
+# 7. Variables inside a function — average.py, with total
+# ---------------------------------------------------------------------
+
+# average.py -- CSCI 131, Monday Nov 2
+
+def average(nums):
+    total = sum(nums)
+    return total / len(nums)
+
+avg = average([88, 92, 75])
+print(avg)
+print(total)
+
+# Output:
+# 85.0
+# Traceback (most recent call last):
+#   File "average.py", line 9, in <module>
+#     print(total)
+# NameError: name 'total' is not defined
+
+
+# ---------------------------------------------------------------------
+# 8. Exercise solution (letters.py)
+# ---------------------------------------------------------------------
+
+# letters.py -- CSCI 131, Monday Nov 2
+
+def count_letter(word, letter):
+    count = 0
+    for ch in word:
+        if ch == letter:
+            count = count + 1
+    return count
+
+print(count_letter('banana', 'a'))
+print(count_letter('Mississippi', 's'))
+print(count_letter('Banana', 'b'))
+
+n = count_letter('banana', 'n')
+print('n appears', n, 'times in banana')
+print(n + 1)
+
+word = input('Word: ')
+letter = input('Letter: ')
+n = count_letter(word, letter)
+
+if n == 1:
+    print(letter, 'appears', n, 'time in', word)
+else:
+    print(letter, 'appears', n, 'times in', word)

@@ -1,0 +1,81 @@
+# =====================================================================
+# Lecture 02: Variables and Input
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. Type conversion. — int and float
+# ---------------------------------------------------------------------
+
+# spelled out
+pay_str = input('Enter pay: ')
+pay = float(pay_str)
+
+# nested -- convert as it comes in
+pay = float(input('Enter pay: '))
+
+
+# ---------------------------------------------------------------------
+# 2. Putting it together — dinner.py, stage 1
+# ---------------------------------------------------------------------
+
+
+bill = float(input('Bill total: '))
+print('Bill:', bill)
+
+# Output:
+# Bill total: 40
+# Bill: 40.0
+
+
+# ---------------------------------------------------------------------
+# 3. Putting it together — dinner.py, stage 2
+# ---------------------------------------------------------------------
+
+bill = float(input('Bill total: '))
+tip_percent = float(input('Tip percent: '))
+
+tip = bill * tip_percent / 100
+total = bill + tip
+
+print('Bill:', bill)
+print('Tip:', tip)
+print('Total:', total)
+
+# Output:
+# Bill total: 40
+# Tip percent: 20
+# Bill: 40.0
+# Tip: 8.0
+# Total: 48.0
+
+
+# ---------------------------------------------------------------------
+# 4. Putting it together — the finished dinner.py
+# ---------------------------------------------------------------------
+
+
+bill = float(input('Bill total: '))
+tip_percent = float(input('Tip percent: '))
+people = int(input('How many people? '))
+
+tip = bill * tip_percent / 100
+total = bill + tip
+each_pays = total / people
+
+print('Bill:', bill)
+print('Tip:', tip)
+print('Total:', total)
+print('Each person pays:', each_pays)
+
+# Output:
+# Bill total: 40
+# Tip percent: 20
+# How many people? 4
+# Bill: 40.0
+# Tip: 8.0
+# Total: 48.0
+# Each person pays: 12.0

@@ -1,0 +1,41 @@
+# =====================================================================
+# Lecture 04: Test 1 Review and Booleans (Monday, September 14)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. R4. The hours program — Example
+# ---------------------------------------------------------------------
+
+total = int(input('Enter minutes: '))
+
+hours = total // 60
+total = total % 60
+
+print('Hours:', hours)
+print('Minutes:', total)
+
+# Output:
+# Enter minutes: 145
+# Hours: 2
+# Minutes: 25
+
+
+# ---------------------------------------------------------------------
+# 2. if only, if only...
+# ---------------------------------------------------------------------
+
+num = int(input('Num: '))
+
+if num >= 10:
+    print('Double digit')
+
+print('Done.')
+
+# Output:
+# Num: 15
+# Double digit
+# Done.

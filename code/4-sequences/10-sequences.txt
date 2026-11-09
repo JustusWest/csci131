@@ -1,0 +1,104 @@
+# =====================================================================
+# Lecture 10: Sequences: Positions, Slices, and in (Monday, October 12)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. The search pattern, already written — roster.py with in
+# ---------------------------------------------------------------------
+
+# roster.py -- CSCI 131, Monday Oct 12
+
+roster = ['Ana', 'Falilou', 'Khailah', 'Jadon', 'Afia', 'Tyson']
+name = input('Name: ')
+
+if name in roster:
+    print(name, 'is on the roster.')
+else:
+    print(name, 'is not on the roster.')
+
+# Output:
+# Name: Afia
+# Afia is on the roster.
+
+
+# ---------------------------------------------------------------------
+# 2. Looping over positions — while with an index
+# ---------------------------------------------------------------------
+
+word = 'banana'
+index = 0
+
+while index < len(word):
+    letter = word[index]
+    print(index, letter)
+    index = index + 1
+
+# Output:
+# 0 b
+# 1 a
+# 2 n
+# 3 a
+# 4 n
+# 5 a
+
+
+# ---------------------------------------------------------------------
+# 3. Looping over positions — the same loop with for
+# ---------------------------------------------------------------------
+
+word = 'banana'
+
+for i in range(len(word)):
+    print(i, word[i])
+
+# Output:
+# 0 b
+# 1 a
+# 2 n
+# 3 a
+# 4 n
+# 5 a
+
+
+# ---------------------------------------------------------------------
+# 4. Where is it? — where.py
+# ---------------------------------------------------------------------
+
+# where.py -- CSCI 131, Monday Oct 12
+
+word = 'banana'
+
+for i in range(len(word)):
+    if word[i] == 'a':
+        print('a at position', i)
+
+# Output:
+# a at position 1
+# a at position 3
+# a at position 5
+
+
+# ---------------------------------------------------------------------
+# 5. Neighbours — warmer.py, first try
+# ---------------------------------------------------------------------
+
+# warmer.py -- CSCI 131, Monday Oct 12
+
+highs = [78, 84, 81, 69, 90, 88, 75, 31, 45, 82, 79, 93, 66, 58]
+count = 0
+
+for i in range(len(highs)):
+    if highs[i + 1] > highs[i]:
+        count = count + 1
+
+print('Warmer than the day before:', count)
+
+# Output:
+# Traceback (most recent call last):
+#   File "warmer.py", line 7, in <module>
+#     if highs[i + 1] > highs[i]:
+# IndexError: list index out of range

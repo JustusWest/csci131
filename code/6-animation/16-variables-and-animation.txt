@@ -1,0 +1,155 @@
+# =====================================================================
+# Lecture 16: Variables and Animation (Monday, November 9)
+#
+# The programs from this lecture, in the order we wrote them.
+# Each one is separate: copy the one you want into a new IDLE file to run it.
+# =====================================================================
+
+
+# ---------------------------------------------------------------------
+# 1. A ball — ball.py
+# ---------------------------------------------------------------------
+
+# ball.py -- CSCI 131, Monday Nov 9
+
+from anim import Window
+
+win = Window(600, 400)
+
+x = 300
+y = 200
+size = 40
+color = 'red'
+
+ball = win.circle(x, y, size, color)
+print(ball)
+
+win.done()
+
+# Output:
+# 1
+
+
+# ---------------------------------------------------------------------
+# 2. Changing the ball — ball.py, changing size and colour
+# ---------------------------------------------------------------------
+
+# ball.py -- CSCI 131, Monday Nov 9
+
+from anim import Window
+
+win = Window(600, 400)
+
+x = win.width / 2
+y = win.height / 2
+size = 40
+color = 'red'
+
+ball = win.circle(x, y, size, color)
+win.pause(1)
+
+size = size * 2
+win.set_size(ball, size)
+win.pause(1)
+
+color = 'blue'
+win.set_color(ball, color)
+win.pause(1)
+
+x = x + 150
+win.move_to(ball, x, y)
+
+win.done()
+
+
+# ---------------------------------------------------------------------
+# 3. Making it fall — fall.py
+# ---------------------------------------------------------------------
+
+# fall.py -- CSCI 131, Monday Nov 9
+
+from anim import Window
+
+win = Window(600, 400)
+
+x = 300
+y = 50
+size = 40
+speed = 10
+
+ball = win.circle(x, y, size, 'red')
+
+while y < win.height + size:
+    y = y + speed
+    win.move_to(ball, x, y)
+    win.show()
+
+win.done()
+
+
+# ---------------------------------------------------------------------
+# 4. Gravity — fall.py, with gravity
+# ---------------------------------------------------------------------
+
+# fall.py -- CSCI 131, Monday Nov 9
+
+from anim import Window
+
+win = Window(600, 400)
+
+x = 300
+y = 50
+size = 40
+speed = 0
+gravity = 1
+frame = 0
+
+ball = win.circle(x, y, size, 'red')
+
+while y < win.height + size:
+    frame = frame + 1
+    speed = speed + gravity
+    y = y + speed
+    win.move_to(ball, x, y)
+    print(frame, speed, y)
+    win.show()
+
+win.done()
+
+
+# ---------------------------------------------------------------------
+# 5. Exercise solution (drop.py)
+# ---------------------------------------------------------------------
+
+# drop.py -- CSCI 131, Monday Nov 9
+
+from anim import Window
+
+win = Window(600, 400)
+
+x1 = 200
+y1 = 50
+size1 = 30
+speed1 = 4
+
+x2 = 400
+y2 = 50
+size2 = 50
+speed2 = 0
+gravity = 0.5
+
+ball1 = win.circle(x1, y1, size1, 'orange')
+ball2 = win.circle(x2, y2, size2, 'purple')
+
+frame = 0
+while y1 < win.height + size1 or y2 < win.height + size2:
+    frame = frame + 1
+    y1 = y1 + speed1
+    speed2 = speed2 + gravity
+    y2 = y2 + speed2
+    win.move_to(ball1, x1, y1)
+    win.move_to(ball2, x2, y2)
+    print(frame, y1, y2)
+    win.show()
+
+win.done()
