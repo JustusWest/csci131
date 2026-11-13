@@ -55,10 +55,15 @@ while win.is_open():
         y = size
         dy = -dy
         win.set_color(ball, 'red')
+    # TODO: The ball falls through and stops the animation
     if y + size > win.height:           # floor
         y = win.height - size
         dy = -dy
         win.set_color(ball, 'red')
+
+    # TODO: Make the ball bounce off the paddle
+
+    # TODO: Add a score to the info panel and make it go up when the ball bounces off the paddle
 
     win.set_text(info, 'x = ' + str(x) + '  y = ' + str(y)) # displays x,y of the ball
 
